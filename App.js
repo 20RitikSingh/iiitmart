@@ -2,6 +2,9 @@ import { SafeAreaView, StyleSheet, Text, View } from 'react-native';
 import Login from './App/Screens/LoginScreen/Login';
 import { ClerkProvider, SignedIn, SignedOut } from '@clerk/clerk-expo';
 import * as SecureStore from "expo-secure-store"
+import Home from './App/Screens/HomeScreen/Home';
+import { NavigationContainer } from '@react-navigation/native';
+import TabNavigation from './App/Navigations/TabNavigation';
 
 export default function App() {
 
@@ -21,16 +24,18 @@ export default function App() {
       }
     },
   };
-  
+
   return (
     <ClerkProvider tokenCache={tokenCache} publishableKey='pk_test_YW11c2luZy1vcmlvbGUtNTMuY2xlcmsuYWNjb3VudHMuZGV2JA'>
       <SafeAreaView style={styles.container}>
-       <SignedIn>
-        <Login />
-          {/* <Text>You are Signed in</Text> */}
+        <SignedIn>
+          <NavigationContainer>
+            <TabNavigation />
+          </NavigationContainer>
+          {/* <Home /> */}
         </SignedIn>
         <SignedOut>
-        <Login />
+          <Login />
         </SignedOut>
       </SafeAreaView>
     </ClerkProvider>
@@ -41,6 +46,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#fff",
-    paddingTop:30
+    paddingTop: 30
   },
 });
