@@ -6,6 +6,7 @@ import Home from './App/Screens/HomeScreen/Home';
 import { NavigationContainer } from '@react-navigation/native';
 import TabNavigation from './App/Navigations/TabNavigation';
 
+
 export default function App() {
 
   const tokenCache = {
@@ -28,6 +29,7 @@ export default function App() {
   return (
     <ClerkProvider tokenCache={tokenCache} publishableKey='pk_test_YW11c2luZy1vcmlvbGUtNTMuY2xlcmsuYWNjb3VudHMuZGV2JA'>
       <SafeAreaView style={styles.container}>
+
         <SignedIn>
           <NavigationContainer>
             <TabNavigation />
