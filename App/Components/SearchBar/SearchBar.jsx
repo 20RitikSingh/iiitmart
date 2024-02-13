@@ -8,7 +8,7 @@ export default function SearchBar() {
     <View style={styles.searchBarContainer}>
       <Feather name="search" size={24} color={Color.PRIMARY} />
         <View style={styles.textInputContainer}>
-        <TextInput placeholder='Search' style={{backgroundColor:Color.WHITE, fontSize:17, paddingLeft:20}}/>
+        <TextInput selectionColor={Color.PRIMARY} placeholder='Search' placeholderTextColor={Color.PRIMARY} style={{backgroundColor:"transparent", fontSize:17, paddingLeft:20, color: Color.PRIMARY}}/>
       </View>
     </View>
     </View>
