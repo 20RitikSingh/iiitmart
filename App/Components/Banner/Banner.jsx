@@ -14,7 +14,7 @@ export default function Banner() {
     const handleScroll = (event) => {
         const scrollPosition = event.nativeEvent.contentOffset.x;
         const index = scrollPosition / screenWidth
-        setActiveIndex(index);
+        setActiveIndex(Math.floor(index));
     }
 
     const getItemLayout = (data, index) => ({
