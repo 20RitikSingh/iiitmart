@@ -3,11 +3,11 @@ import React from 'react'
 
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Home from '../Screens/HomeScreen/Home';
-import { Fontisto } from '@expo/vector-icons';
 import { FontAwesome6 } from '@expo/vector-icons';
 import { FontAwesome } from '@expo/vector-icons';
 import { MaterialIcons } from '@expo/vector-icons';
 import Color from '../../utils/Color';
+import Profile from '../Screens/ProfileScreen/Profile';
 
 const Tab = createBottomTabNavigator();
 
@@ -15,9 +15,11 @@ export default function TabNavigation() {
   return (
     <Tab.Navigator screenOptions={{
         headerShown:false,
-        tabBarActiveTintColor: Color.PRIMARY,
+        tabBarActiveTintColor: Color.TER,
+        tabBarInactiveTintColor: Color.WHITE,
         tabBarShowLabel: false,
-        tabBarHideOnKeyboard:true
+        tabBarHideOnKeyboard:true,
+        tabBarStyle:{backgroundColor: Color.PRIMARY}
     }}>
       <Tab.Screen name="Home" component={Home} 
         options={{
@@ -40,7 +42,7 @@ export default function TabNavigation() {
             )
         }}
       />
-      <Tab.Screen name="Profile" component={Home} 
+      <Tab.Screen name="Profile" component={Profile} 
         options={{
             // tabBarLabel: ({ color = 'black' }) => (
             //     <Text style={{color:color, fontSize:12, marginTop:-7}}>Profile</Text>
@@ -50,7 +52,7 @@ export default function TabNavigation() {
             )
         }}
       />
-      <Tab.Screen name="Orders" component={Home} 
+      {/* <Tab.Screen name="Orders" component={Home} 
         options={{
             // tabBarLabel: ({ color = 'black' }) => (
             //     <Text style={{color:color, fontSize:12, marginTop:-7}}>Orders</Text>
@@ -59,7 +61,7 @@ export default function TabNavigation() {
                 <Fontisto name="bookmark-alt" size={size-2} color={color} />
             )
         }}
-      />
+      /> */}
       <Tab.Screen name="Cart" component={Home} 
         options={{
             // tabBarLabel: ({ color = 'black' }) => (
