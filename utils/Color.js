@@ -5,5 +5,4 @@ export default {
     TER : '#ff6c3d',
     GREY: '#8c8d8f',
     LIGHT_GREY: '#f8f8f8',
-
 }

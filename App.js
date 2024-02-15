@@ -28,7 +28,7 @@ export default function App() {
 
   return (
     <ClerkProvider tokenCache={tokenCache} publishableKey='pk_test_YW11c2luZy1vcmlvbGUtNTMuY2xlcmsuYWNjb3VudHMuZGV2JA'>
-      <SafeAreaView style={styles.container}>
+      <View style={styles.container}>
 
         <SignedIn>
           <NavigationContainer>
@@ -39,7 +39,7 @@ export default function App() {
         <SignedOut>
           <Login />
         </SignedOut>
-      </SafeAreaView>
+      </View>
     </ClerkProvider>
   );
 }

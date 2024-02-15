@@ -13,8 +13,10 @@ export default function Banner() {
 
     const handleScroll = (event) => {
         const scrollPosition = event.nativeEvent.contentOffset.x;
-        const index = scrollPosition / screenWidth
-        setActiveIndex(Math.floor(index));
+        const index = (scrollPosition / screenWidth)
+        setActiveIndex(index);
+
+        console.log(index,Math.floor(index))
     }
 
     const getItemLayout = (data, index) => ({
@@ -27,16 +29,18 @@ export default function Banner() {
 
     useEffect(() => {
        let interval = setInterval(() => {
+        // console.log(banners.length-1,activeIndex)
         if(Math.ceil(activeIndex) === banners.length-1){
+            // console.log('lastindex',activeIndex)
             flatlistRef.current.scrollToIndex({index: 0,animation:true})
         }
         else{
-            flatlistRef.current.scrollToIndex({index: activeIndex+1 ,animation:true})
+          // console.log('index',activeIndex)
+            flatlistRef.current.scrollToIndex({index: activeIndex + 1 ,animation:true})
         }
         },3000)
-        return () => {
-            clearInterval(interval)
-        }
+        return () => clearInterval(interval)
+
     })
 
 

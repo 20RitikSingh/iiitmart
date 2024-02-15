@@ -16,4 +16,4 @@ async function getTopDeals(){
    const res = await request(MASTER_URL ,query)
    return res 
 }
-export default {getTopDeals}
+export default getTopDeals
