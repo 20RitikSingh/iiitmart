@@ -64,19 +64,19 @@ const styles = StyleSheet.create({
         display: 'flex',
         alignItems: 'center',
         width: '100%',
-        marginTop: 20,
-        paddingVertical: 20,
+        marginTop: 10,
+        paddingVertical: 10,
         // backgroundColor:'#FFA07A'
     },
     userImg: {
-        width: 100,
-        height: 100,
+        width: 95,
+        height: 95,
         borderRadius: 50,
     },
     userName: {
         fontSize: 36,
         color: Color.PRIMARY,
-        marginTop: 10
+        marginTop: 0
     },
     userMail: {
         fontSize: 16,
@@ -88,7 +88,7 @@ const styles = StyleSheet.create({
         // alignItems:'center',
     },
     button:{
-        padding:15, 
+        padding:10, 
         backgroundColor: Color.PRIMARY,
         borderRadius: 80,
         alignItems:"center",

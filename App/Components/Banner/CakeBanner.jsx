@@ -1,9 +1,9 @@
 import { View, FlatList, StyleSheet, Image, Dimensions } from 'react-native'
 import React,{useState,useEffect, useRef} from 'react'
-import GlobalAPI from '../../../utils/GlobalAPI';
+import CakeBanners from '../../../utils/CakeBanners';
 
 
-export default function Banner() {
+export default function CakeBanner() {
     const [banners, setBanners] = useState([]);
     const [activeIndex, setActiveIndex] = useState(0);
     
@@ -30,7 +30,7 @@ export default function Banner() {
     useEffect(() => {
        let interval = setInterval(() => {
         // console.log(banners.length-1,activeIndex)
-        if(Math.ceil(activeIndex) === banners.length-1){
+        if(Math.ceil(activeIndex) === banners?.length-1){
             // console.log('lastindex',activeIndex)
             flatlistRef.current.scrollToIndex({index: 0,animation:true})
         }
@@ -45,8 +45,9 @@ export default function Banner() {
 
 
     useEffect(() => {
-      GlobalAPI.getBanners().then((res) => {
-        setBanners(res?.banners)
+      CakeBanners.getCakeBanners().then((res) => {
+        console.log(res)
+        setBanners(res?.cakeBanners)
       })
     }, [])
 

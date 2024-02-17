@@ -8,6 +8,7 @@ import { FontAwesome } from '@expo/vector-icons';
 import { MaterialIcons } from '@expo/vector-icons';
 import Color from '../../utils/Color';
 import Profile from '../Screens/ProfileScreen/Profile';
+import Cake from '../Screens/CakeScreen/Cake';
 
 const Tab = createBottomTabNavigator();
 
@@ -32,7 +33,7 @@ export default function TabNavigation() {
             )
         }}
       />
-      <Tab.Screen name="Cake" component={Home} 
+      <Tab.Screen name="Cake" component={Cake} 
         options={{
             // tabBarLabel: ({ color = 'black' }) => (
             //     <Text style={{color:color, fontSize:12, marginTop:-7}}>CAKE</Text>
