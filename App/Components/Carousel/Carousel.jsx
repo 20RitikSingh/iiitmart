@@ -24,9 +24,9 @@ export default function Carousel({Heading,API}) {
       data={carouselData}
       renderItem={({item,index})=>(
         <View style={styles.productContainer}>
-          <View style={styles.productImageContainer}>
+          <TouchableOpacity style={styles.productImageContainer}>
          <Image source={{uri:item?.images[0]?.url}} style={styles.productImage}/>
-         </View>
+         </TouchableOpacity>
          <Text style={styles.productTitle}>{
          (item?.name.length > 20 ) ? item?.name.slice(0,20)+' ...' : item?.name}</Text>
          <View style={{display:'flex',flexDirection:'row',alignItems:'center',justifyContent:'space-between'}}>

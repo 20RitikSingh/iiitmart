@@ -16,7 +16,7 @@ export default function Banner() {
         const index = (scrollPosition / screenWidth)
         setActiveIndex(index);
 
-        console.log(index,Math.floor(index))
+        // console.log(index,Math.floor(index))
     }
 
     const getItemLayout = (data, index) => ({
