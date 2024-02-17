@@ -9,7 +9,7 @@ import { MaterialIcons } from '@expo/vector-icons';
 import Color from '../../utils/Color';
 import Profile from '../Screens/ProfileScreen/Profile';
 import Cake from '../Screens/CakeScreen/Cake';
-
+import Product from '../Screens/ProductScreen/Product';
 const Tab = createBottomTabNavigator();
 
 export default function TabNavigation() {
@@ -63,7 +63,7 @@ export default function TabNavigation() {
             )
         }}
       /> */}
-      <Tab.Screen name="Cart" component={Home} 
+      <Tab.Screen name="Cart" component={Product} 
         options={{
             // tabBarLabel: ({ color = 'black' }) => (
             //     <Text style={{color:color, fontSize:12, marginTop:-7}}>Cart</Text>
