@@ -11,27 +11,38 @@ export default function Profile() {
         {
             id: 1,
             name: 'Order',
-            icon: 'bookmark-o'
+            icon: 'bookmark-o',
+            press : ''
         },
         {
             id: 2,
             name: 'Reffer Points',
-            icon: 'address-book-o'
+            icon: 'share-square-o',
+            press : ''
         },
         {
             id: 3,
             name: 'Request a Product',
-            icon: 'pencil-square-o'
+            icon: 'pencil-square-o',
+            press : ''
         },
         {
             id: 4,
             name: 'Review',
-            icon: 'comment-o'
+            icon: 'comment-o',
+            press : ''
         },
         {
             id: 5,
+            name: 'Address',
+            icon: 'address-card-o',
+            press : 'addAddress'
+        },
+        {
+            id: 6,
             name: 'Get Updates on WhatsApp',
-            icon: 'whatsapp'
+            icon: 'whatsapp',
+            press : ''
         },
     ]
 
