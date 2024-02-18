@@ -44,42 +44,7 @@ export default function Profile() {
             icon: 'whatsapp',
             press: ''
         },
-        {
-            id: 7,
-            name: 'Get Updates on WhatsApp',
-            icon: 'whatsapp',
-            press: ''
-        },
-        {
-            id: 8,
-            name: 'Get Updates on WhatsApp',
-            icon: 'whatsapp',
-            press: ''
-        },
-        {
-            id: 9,
-            name: 'Get Updates on WhatsApp',
-            icon: 'whatsapp',
-            press: ''
-        },
-        {
-            id: 10,
-            name: 'Get Updates on WhatsApp',
-            icon: 'whatsapp',
-            press: ''
-        },
-        {
-            id: 11,
-            name: 'Get Updates on WhatsApp',
-            icon: 'whatsapp',
-            press: ''
-        },
-        {
-            id: 12,
-            name: 'Get Updates on WhatsApp',
-            icon: 'whatsapp',
-            press: ''
-        },
+       
     ]
 
     const ListHeader = () => {
