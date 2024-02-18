@@ -2,6 +2,7 @@ import { View, StyleSheet, Text, TouchableOpacity, Modal, Pressable, TextInput }
 import React, { useEffect, useState } from 'react'
 import Color from '../../../utils/Color'
 import { FontAwesome } from '@expo/vector-icons';
+import { AntDesign } from '@expo/vector-icons';
 import { useUser } from '@clerk/clerk-expo';
 import Customer from '../../../utils/Customer';
 import { useToast } from "react-native-toast-notifications";
@@ -103,15 +104,24 @@ export default function ProfileMenu({ item }) {
 
                     <View style={styles.centeredView}>
                         <View style={styles.modalView}>
-                            <Text style={styles.modalText}>Update your Address</Text>
+                            <View style={styles.modalHead}>
+                                <Text style={styles.modalText}>Update your Address</Text>
+                                <Pressable
+                                    style={styles.buttonClose}
+                                    onPress={() => setModalVisible(!modalVisible)}>
+                                    <AntDesign name="close" size={24} color="black" />
+                                </Pressable>
+                            </View>
                             <View style={{ width: '95%' }}>
                                 {/* <TextInput selectionColor={Color.PRIMARY} placeholder='Search' placeholderTextColor={Color.PRIMARY} style={styles.addressText} /> */}
+                                <Text style={styles.label}>Address</Text>
                                 <TextInput
                                     style={styles.input}
                                     onChangeText={onChangeText}
                                     placeholder="Enter Address"
                                     value={text}
                                 />
+                                <Text style={styles.label}>Phone No.</Text>
                                 <TextInput
                                     style={styles.input}
                                     onChangeText={onChangeNumber}
@@ -123,14 +133,9 @@ export default function ProfileMenu({ item }) {
                             </View>
                             <View style={styles.btnCont}>
                                 <Pressable
-                                    style={[styles.button, styles.buttonAdd]}
+                                    style={styles.buttonAdd}
                                     onPress={addAddress}>
                                     <Text style={styles.textStyle}>Save Address</Text>
-                                </Pressable>
-                                <Pressable
-                                    style={[styles.button, styles.buttonClose]}
-                                    onPress={() => setModalVisible(!modalVisible)}>
-                                    <Text style={{color: Color.PRIMARY, fontWeight:'bold', textAlign:'center'}}>Close Modal</Text>
                                 </Pressable>
                             </View>
                         </View>
@@ -179,7 +184,7 @@ const styles = StyleSheet.create({
         borderRadius: 20,
         paddingBottom: 10,
         paddingHorizontal: 5,
-        paddingTop: 10,
+        paddingTop: 20,
         alignItems: 'center',
         shadowColor: '#000',
         shadowOffset: {
@@ -190,16 +195,21 @@ const styles = StyleSheet.create({
         shadowRadius: 4,
         elevation: 5,
     },
-    button: {
-        borderRadius: 20,
-        padding: 10,
-        elevation: 4,
-    },
     buttonClose: {
-        backgroundColor: Color.LIGHT_GREY,
+        // backgroundColor: Color.LIGHT_GREY,
+        color: Color.GREY,
+        display: "flex",
+        alignItems: 'center',
+        justifyContent: 'center',
+        paddingBottom: 15
     },
     buttonAdd: {
+        borderRadius: 4,
+        padding: 10,
+        elevation: 4,
+        width:'100%',
         backgroundColor: Color.TER,
+        marginTop:-15
     },
     textStyle: {
         color: 'white',
@@ -217,7 +227,7 @@ const styles = StyleSheet.create({
         margin: 12,
         borderWidth: 1,
         padding: 10,
-        borderRadius: 50,
+        borderRadius: 4,
         paddingHorizontal: 15,
     },
     btnCont: {
@@ -226,5 +236,17 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         width: '100%',
         padding: 20
+    },
+    label: {
+        marginLeft: 12,
+        // backgroundColor:'#ff0000b2',
+        marginBottom: -13,
+        color: Color.GREY
+    },
+    modalHead: {
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        width: '90%'
     }
 })
