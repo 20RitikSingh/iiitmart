@@ -1,16 +1,18 @@
-import { View, Text } from 'react-native'
+import { View, Text, ScrollView } from 'react-native'
 import React from 'react'
 import SearchBar from '../../Components/SearchBar/SearchBar'
 import Banner from '../../Components/Banner/Banner'
 import TopDeals from './TopDeals'
 import Color from '../../../utils/Color'
+import Categories from './Categories'
 
 export default function Home() {
   return (
-    <View style={{backgroundColor: Color.WHITE}} >
+    <ScrollView style={{backgroundColor: Color.WHITE}} >
       <SearchBar/>
       <Banner />
       <TopDeals/>
-    </View>
+      <Categories/>
+    </ScrollView>
   )
 }
