@@ -4,7 +4,7 @@ import Color from '../../../utils/Color'
 import { Feather } from '@expo/vector-icons';
 export default function SearchBar() {
   return (
-    <View style={{display:'flex',alignItems:'center'}}>
+    <View style={{display:'flex',alignItems:'center',    backgroundColor:Color.PRIMARY}}>
     <View style={styles.searchBarContainer}>
       <Feather name="search" size={24} color={Color.PRIMARY} />
         <View style={styles.textInputContainer}>
@@ -28,6 +28,8 @@ searchBarContainer:{
     borderRadius:20,
     borderColor:Color.PRIMARY,
     marginTop:10,
+    marginBottom:10,
+    backgroundColor:Color.WHITE
 }
 ,
 textInputContainer:{
