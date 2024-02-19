@@ -12,12 +12,11 @@ import getTopDeals from "../../../utils/TopDealsAPI";
 import getCustomers from "../../../utils/CustomerAPI";
 import Color from "../../../utils/Color";
 import { useClerk } from '@clerk/clerk-react';
-import { SelectList } from "react-native-dropdown-select-list";
-import Swiper from "react-native-swiper";
+
 export default function Cart() {
   const [productData, setProductData] = useState([]);
   const [totalAmount, setTotalAmount] = useState(0);
-  const { user, session } = useClerk();
+  const { user } = useClerk();
     
 //   useEffect(() => {
 //     getTopDeals().then((res) => {
@@ -32,18 +31,18 @@ export default function Cart() {
 
 //finding the current user in hygraph db
 
-    useEffect(() => {
-        getCustomers().then((res) => {
-            const customers = res?.customers;
-            const currentUser = customers.find((customer) => customer.clerkId === user.id);
-            console.log(currentUser)
+    // useEffect(() => {
+    //     getCustomers().then((res) => {
+    //         const customers = res?.customers;
+    //         const currentUser = customers.find((customer) => customer.clerkId === user.id);
+    //         console.log(currentUser)
         //     const productsWithQuantity = currentUser?.cart?.cartorder.map((product) => ({
         //         ...product,
         //         quantity: 0,
         //     }));
         //     setProductData(productsWithQuantity);
-        });
-    }, [user]);
+    //     });
+    // }, [user]);
 
 
 
