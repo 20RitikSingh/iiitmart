@@ -25,7 +25,7 @@ export default function Cake() {
       data.push({key: `empty-${amountItemsLastRow}`, empty: true});
       amountItemsLastRow++;
     }
-    console.log(data);
+    // console.log(data);
     return data;
   };
 

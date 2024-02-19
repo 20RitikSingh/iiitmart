@@ -26,7 +26,7 @@ export default function ProfileMenu({ item }) {
     }, [])
 
     const addAddress = () => {
-        if (text.length < 5) {
+        if (text.length < 3) {
             toast.show("Address is too short", {
                 type: "danger",
                 placement: "bottom",
@@ -85,6 +85,8 @@ export default function ProfileMenu({ item }) {
 
         }
     }
+
+    
     return (
         <TouchableOpacity style={styles.container} onPress={() => setModalVisible(true)}>
             <View style={styles.innerCont}>

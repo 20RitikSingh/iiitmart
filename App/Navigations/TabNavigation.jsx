@@ -10,6 +10,8 @@ import Color from '../../utils/Color';
 import Profile from '../Screens/ProfileScreen/Profile';
 import Cake from '../Screens/CakeScreen/Cake';
 import Product from '../Screens/ProductScreen/Product';
+import Orders from '../Screens/OrdersScreen/Orders';
+import OrderDetails from '../Screens/OrdersScreen/OrderDetails';
 const Tab = createBottomTabNavigator();
 
 export default function TabNavigation() {
@@ -63,7 +65,7 @@ export default function TabNavigation() {
             )
         }}
       /> */}
-      <Tab.Screen name="Cart" component={Product} 
+      <Tab.Screen name="Cart" component={OrderDetails} 
         options={{
             // tabBarLabel: ({ color = 'black' }) => (
             //     <Text style={{color:color, fontSize:12, marginTop:-7}}>Cart</Text>

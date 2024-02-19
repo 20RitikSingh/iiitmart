@@ -44,43 +44,43 @@ export default function Profile() {
             icon: 'whatsapp',
             press: ''
         },
-       
+
     ]
 
-    const ListHeader = () => {
-        return (
+    // const ListHeader = () => {
+    //     return (
+
+    //     );
+    // };
+    // const ListFooter = () => {
+    //     return (
+           
+    //     );
+    // };
+
+    const { user, isLoading } = useUser();
+    const { isLoaded, signOut } = useAuth();
+    return (
+        <ScrollView style={{ backgroundColor: Color.WHITE, minHeight: '100%', display: 'flex', alignContent: 'center', width: '100%' }}>
             <View style={styles.ImgCont}>
                 <Image source={{ uri: user?.imageUrl }} style={styles.userImg} />
                 <Text style={styles.userName}>{user?.fullName}</Text>
                 <Text style={styles.userMail}>{user?.primaryEmailAddress.emailAddress}</Text>
             </View>
-        );
-    };
-    const ListFooter = () => {
-        return (
-            <TouchableOpacity style={styles.button} onPress={() => signOut()}>
-                <Text style={{ color: Color.WHITE, fontSize: 17, fontWeight: '600' }}>LOGOUT</Text>
-            </TouchableOpacity>
-        );
-    };
-
-    const { user, isLoading } = useUser();
-    const { isLoaded, signOut } = useAuth();
-    return (
-        <View style={{ backgroundColor: Color.WHITE, minHeight: '100%', display: 'flex', alignContent: 'center', width: '100%' }}>
-
             <View style={styles.menuCont}>
                 <FlatList
                     data={menu}
-                    ListFooterComponent={ListFooter}
-                    ListHeaderComponent={ListHeader}
+                    // ListFooterComponent={ListFooter}
+                    // ListHeaderComponent={ListHeader}
                     renderItem={({ item, index }) => (
                         <ProfileMenu item={item} />
                     )}
                 />
             </View>
-
-        </View>
+            <TouchableOpacity style={styles.button} onPress={() => signOut()}>
+                <Text style={{ color: Color.WHITE, fontSize: 17, fontWeight: '600' }}>LOGOUT</Text>
+            </TouchableOpacity>
+        </ScrollView>
     )
 }
 
