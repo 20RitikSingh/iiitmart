@@ -64,7 +64,7 @@ export default function TabNavigation() {
             )
         }}
       /> */}
-      <Tab.Screen name="Cart" component={CheckOut} 
+      <Tab.Screen name="Cart" component={Product} 
         options={{
             // tabBarLabel: ({ color = 'black' }) => (
             //     <Text style={{color:color, fontSize:12, marginTop:-7}}>Cart</Text>
