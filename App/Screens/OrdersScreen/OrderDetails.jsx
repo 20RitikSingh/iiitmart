@@ -3,6 +3,7 @@ import React from 'react'
 import Color from '../../../utils/Color'
 import OrderDetailItem from '../../Components/OrderItem/OrderDetailItem'
 import { Ionicons } from '@expo/vector-icons';
+import { useNavigation } from '@react-navigation/native';
 
 
 const itemw = {
@@ -38,16 +39,19 @@ const itemw = {
     "address": "BH1 Arawali Gwalior, MP",
     "delivered": true
 }
-export default function OrderDetails({item = itemw}) {
-
-
+export default function OrderDetails({ route }) {
+    const navigation = useNavigation();
+    const item = route.params.prop;
+    console.log(item.orderItems)
     return (
         <View style={{ height: '100%' }}>
             <View style={styles.headingCont}>
                 <Text style={styles.heading}>
                     Order Details
                 </Text>
-                <TouchableOpacity style={styles.backButton} onPress={{}}>
+                <TouchableOpacity style={styles.backButton} onPress={() => {
+                navigation.goBack();
+              }}>
                     <Text><Ionicons name="arrow-back" size={24} color='white' /></Text>
                 </TouchableOpacity>
             </View>

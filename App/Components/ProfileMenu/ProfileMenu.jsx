@@ -6,6 +6,7 @@ import { AntDesign } from '@expo/vector-icons';
 import { useUser } from '@clerk/clerk-expo';
 import Customer from '../../../utils/Customer';
 import { useToast } from "react-native-toast-notifications";
+import { useNavigation } from '@react-navigation/native';
 
 
 export default function ProfileMenu({ item }) {
@@ -25,6 +26,7 @@ export default function ProfileMenu({ item }) {
         })
     }, [])
 
+    const navigation = useNavigation();
     const addAddress = () => {
         if (text.length < 3) {
             toast.show("Address is too short", {
@@ -86,15 +88,28 @@ export default function ProfileMenu({ item }) {
         }
     }
 
-    
+    const ordersPage = () => {
+
+    }
+
+    const check = () => {
+        if (item.press == 'addAddressModal') {
+            setModalVisible(true);
+        } else if (item.press == 'ordersPage') {
+            navigation.navigate('OrdersPage');
+        }
+    }
+
     return (
-        <TouchableOpacity style={styles.container} onPress={() => setModalVisible(true)}>
+        <TouchableOpacity style={styles.container}
+            onPress={check}
+        >
             <View style={styles.innerCont}>
                 <FontAwesome name={item.icon} size={27} color={Color.PRIMARY} />
                 <Text style={{ fontSize: 16, color: Color.PRIMARY, fontWeight: 600 }} >{item.name}</Text>
                 <FontAwesome name="angle-right" size={27} color={Color.PRIMARY} />
             </View>
-            {item.press == 'addAddress' &&
+            {item.press == 'addAddressModal' &&
                 <Modal
                     animationType="slide"
                     transparent={true}
@@ -209,9 +224,9 @@ const styles = StyleSheet.create({
         borderRadius: 4,
         padding: 10,
         elevation: 4,
-        width:'100%',
+        width: '100%',
         backgroundColor: Color.TER,
-        marginTop:-15
+        marginTop: -15
     },
     textStyle: {
         color: 'white',

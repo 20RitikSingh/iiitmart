@@ -1,23 +1,26 @@
-import { Image, StyleSheet, Text, View } from 'react-native'
+import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React from 'react'
 import Color from '../../../utils/Color'
 import { Ionicons } from '@expo/vector-icons';
+import { useNavigation } from '@react-navigation/native';
 
 export default function OrderDetailItem({ item }) {
-    // console.log(item);
+    // console.log(item.product);
+    const navigation = useNavigation();
+    const prop = item.product
     return (
-        <View style={styles.container}>
+        <TouchableOpacity style={styles.container} onPress={() => { navigation.navigate('Product', { item: prop }) }}>
             <Image source={{ uri: item?.product?.images[0].url }} style={styles.image} />
             <View style={styles.rightContainer}>
                 <View style={{ display: 'flex', justifyContent: 'space-between', flexDirection: 'column', alignItems: 'flex-start' }}>
                     <Text numberOfLines={1} style={styles.name}>{item.product.name}</Text>
                 </View>
                 <View style={{ display: 'flex', justifyContent: 'space-between', flexDirection: 'row', alignItems: 'center', marginTop: 8 }}>
-                    <Text style={styles.quantity}>Qnt: {item.total/item.product.price}</Text>
+                    <Text style={styles.quantity}>Qnt: {item.total / item.product.price}</Text>
                     <Text style={styles.price}>Total: ₹ {item.total}</Text>
                 </View>
             </View>
-        </View>
+        </TouchableOpacity>
     )
 }
 
@@ -47,7 +50,7 @@ const styles = StyleSheet.create({
         paddingBottom: 4,
         display: 'flex',
         height: '100%',
-        flexDirection:'column',
+        flexDirection: 'column',
         // alignItems:'center',
         // justifyContent: 'space-between',
     },
@@ -55,16 +58,16 @@ const styles = StyleSheet.create({
         color: Color.PRIMARY,
         fontWeight: "bold",
         fontSize: 18,
-        marginBottom:8,
-        width:'100%'
+        marginBottom: 8,
+        width: '100%'
         // marginTop: -2
     },
     quantity: {
         color: Color.GREY,
-        fontSize:15
+        fontSize: 15
     },
     price: {
         fontWeight: 'bold',
-        fontSize:16
+        fontSize: 16
     }
 })

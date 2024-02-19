@@ -12,7 +12,7 @@ export default function Profile() {
             id: 1,
             name: 'Order',
             icon: 'bookmark-o',
-            press: ''
+            press: 'ordersPage'
         },
         {
             id: 2,
@@ -36,7 +36,7 @@ export default function Profile() {
             id: 5,
             name: 'Address',
             icon: 'address-card-o',
-            press: 'addAddress'
+            press: 'addAddressModal'
         },
         {
             id: 6,
@@ -47,16 +47,6 @@ export default function Profile() {
 
     ]
 
-    // const ListHeader = () => {
-    //     return (
-
-    //     );
-    // };
-    // const ListFooter = () => {
-    //     return (
-           
-    //     );
-    // };
 
     const { user, isLoading } = useUser();
     const { isLoaded, signOut } = useAuth();
@@ -70,8 +60,6 @@ export default function Profile() {
             <View style={styles.menuCont}>
                 <FlatList
                     data={menu}
-                    // ListFooterComponent={ListFooter}
-                    // ListHeaderComponent={ListHeader}
                     renderItem={({ item, index }) => (
                         <ProfileMenu item={item} />
                     )}

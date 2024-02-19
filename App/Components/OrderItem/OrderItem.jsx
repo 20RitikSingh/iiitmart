@@ -1,26 +1,30 @@
-import { Image, StyleSheet, Text, View } from 'react-native'
+import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React from 'react'
 import Color from '../../../utils/Color'
 import { Ionicons } from '@expo/vector-icons';
+import { useNavigation } from '@react-navigation/native';
 
 export default function OrderItem({ item }) {
+
+    const navigation = useNavigation();
+    const prop = item;
     return (
-        <View style={styles.container}>
+        <TouchableOpacity style={styles.container} onPress={() => { navigation.navigate('OrdersDetailsPage', {prop}) }}>
             <Image source={{ uri: item.orderItems[0]?.product?.images[0].url }} style={styles.image} />
             <View style={styles.rightContainer}>
                 <View style={{ display: 'flex', justifyContent: 'space-between', flexDirection: 'column', alignItems: 'flex-start' }}>
                     <Text style={styles.delivered}>{item.delivered ? 'Delivered  ' : 'Ordered '}
-                        <Ionicons name={item.delivered ? "checkmark-done-sharp": "checkmark-outline"} size={15} color='blue' />
+                        <Ionicons name={item.delivered ? "checkmark-done-sharp" : "checkmark-outline"} size={15} color='blue' />
                     </Text>
                     {/* <Text style={styles.delivered}>{order.delivered ? 'Delivered' : 'Ordered'}</Text> */}
                     <Text style={styles.date}>Delivered on: {item.date}</Text>
                 </View>
                 <View style={{ display: 'flex', justifyContent: 'space-between', flexDirection: 'row', alignItems: 'center', marginTop: 2 }}>
-                    <Text style={styles.quantity}>{item.orderItems.length} items</Text>
+                    <Text style={styles.quantity}>{item.orderItems?.length} items</Text>
                     <Text style={styles.price}>₹ {item.total}</Text>
                 </View>
             </View>
-        </View>
+        </TouchableOpacity>
     )
 }
 
