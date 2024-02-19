@@ -25,6 +25,7 @@ import Swiper from "react-native-swiper";
 import Carousel from "../../Components/Carousel/Carousel";
 import TopDealsAPI from "../../../utils/TopDealsAPI";
 import { Ionicons } from '@expo/vector-icons';
+import SearchBar from "../../Components/SearchBar/SearchBar";
 
 const ProductPage = () => {
   const [quantity, setQuantity] = useState(1);
@@ -43,6 +44,7 @@ const ProductPage = () => {
 
   return (
     <View style={styles.container}>
+       <SearchBar/>
       <View style={styles.topContainer}>
         <ScrollView style={styles.ScrollView}>
           <View style={styles.carouselContainer}>
