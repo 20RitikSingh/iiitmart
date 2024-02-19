@@ -6,6 +6,7 @@ import Home from './App/Screens/HomeScreen/Home';
 import { ToastProvider } from 'react-native-toast-notifications'
 import { NavigationContainer } from '@react-navigation/native';
 import TabNavigation from './App/Navigations/TabNavigation';
+import MyStack from './App/Navigations/MyStack';
 
 
 export default function App() {
@@ -34,7 +35,7 @@ export default function App() {
 
           <SignedIn>
             <NavigationContainer>
-              <TabNavigation />
+              <MyStack/>
             </NavigationContainer>
             {/* <Home /> */}
           </SignedIn>
