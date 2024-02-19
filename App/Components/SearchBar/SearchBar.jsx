@@ -1,31 +1,46 @@
-import { View,StyleSheet, TextInput } from 'react-native'
-import React from 'react'
+import { View,StyleSheet, TextInput, SafeAreaView, TouchableOpacity } from 'react-native'
+import React,{useEffect, useState} from 'react'
 import Color from '../../../utils/Color'
-import { Feather } from '@expo/vector-icons';
-export default function SearchBar() {
-  return (
-    <View style={{display:'flex',alignItems:'center',    backgroundColor:Color.PRIMARY}}>
-    <View style={styles.searchBarContainer}>
-      <Feather name="search" size={24} color={Color.PRIMARY} />
-        <View style={styles.textInputContainer}>
-        <TextInput selectionColor={Color.PRIMARY} placeholder='Search' placeholderTextColor={Color.PRIMARY} style={{backgroundColor:"transparent", fontSize:17, paddingLeft:20, color: Color.PRIMARY}}/>
-      </View>
-    </View>
+import { FontAwesome } from '@expo/vector-icons';
+export default function SearchBar({navigation}) {
+  const [searchQuery,setSearchQuery] = useState('')
+   return (
+    <View style={{display:'flex',alignItems:'center', backgroundColor:Color.PRIMARY}}>
+    <TouchableOpacity style={styles.searchBarContainer} onPress={()=>navigation.navigate('Search')}>
+    
+        <TextInput selectionColor={Color.PRIMARY}
+          placeholder='Search'
+          placeholderTextColor={Color.GREY} 
+          clearButtonMode='always'
+          value={searchQuery}
+          autoCapitalize='none'
+          autoCorrect={false}
+          style={styles.textInputContainer}
+          onChangeText={
+            (text) => {
+              setSearchQuery(text)
+            }
+          }
+          />
+          <FontAwesome name="search" size={24} color={Color.BLACK} />
+        
+    </TouchableOpacity>
+
     </View>
   )
 }
 const styles = StyleSheet.create({
 
 searchBarContainer:{
-    width:'80%',
+    width:'90%',
     height:50,
     display:'flex',
     flexDirection:'row',
     alignItems:'center',
     justifyContent:'center',
-    padding:8,
+    padding:4,
     borderWidth:2,
-    borderRadius:20,
+    borderRadius:10,
     borderColor:Color.PRIMARY,
     marginTop:10,
     marginBottom:10,
@@ -33,7 +48,9 @@ searchBarContainer:{
 }
 ,
 textInputContainer:{
-    width:'90%',
+    width:'80%',
+    paddingHorizontal:4,
+    fontSize:18,
 }
 ,
 

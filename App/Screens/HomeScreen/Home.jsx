@@ -1,4 +1,4 @@
-import { View, Text, ScrollView } from 'react-native'
+import { View, Text } from 'react-native'
 import React from 'react'
 import SearchBar from '../../Components/SearchBar/SearchBar'
 import Banner from '../../Components/Banner/Banner'
@@ -7,13 +7,13 @@ import Color from '../../../utils/Color'
 import Categories from './Categories'
 import TabNavigation from '../../Navigations/TabNavigation'
 
-export default function Home() {
+export default function Home({navigation}) {
   return (
-    <ScrollView style={{backgroundColor: Color.WHITE}} >
-      <SearchBar/>
+    <View style={{backgroundColor: Color.WHITE}} >
+      <SearchBar navigation={navigation}/>
       <Banner />
       <TopDeals/>
       <Categories/>
-    </ScrollView>
+    </View>
   )
 }
