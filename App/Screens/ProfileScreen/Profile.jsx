@@ -11,51 +11,76 @@ export default function Profile() {
         {
             id: 1,
             name: 'Order',
-            icon: 'bookmark-o'
+            icon: 'bookmark-o',
+            press: ''
         },
         {
             id: 2,
             name: 'Reffer Points',
-            icon: 'address-book-o'
+            icon: 'share-square-o',
+            press: ''
         },
         {
             id: 3,
             name: 'Request a Product',
-            icon: 'pencil-square-o'
+            icon: 'pencil-square-o',
+            press: ''
         },
         {
             id: 4,
             name: 'Review',
-            icon: 'comment-o'
+            icon: 'comment-o',
+            press: ''
         },
         {
             id: 5,
-            name: 'Get Updates on WhatsApp',
-            icon: 'whatsapp'
+            name: 'Address',
+            icon: 'address-card-o',
+            press: 'addAddress'
         },
+        {
+            id: 6,
+            name: 'Get Updates on WhatsApp',
+            icon: 'whatsapp',
+            press: ''
+        },
+       
     ]
 
-    const { user, isLoading } = useUser();
-    const { isLoaded, signOut } = useAuth();
-    return (
-        <ScrollView style={{ backgroundColor: Color.WHITE, minHeight: '100%', display: 'flex', alignContent: 'center', width: '100%' }}>
+    const ListHeader = () => {
+        return (
             <View style={styles.ImgCont}>
                 <Image source={{ uri: user?.imageUrl }} style={styles.userImg} />
                 <Text style={styles.userName}>{user?.fullName}</Text>
                 <Text style={styles.userMail}>{user?.primaryEmailAddress.emailAddress}</Text>
             </View>
+        );
+    };
+    const ListFooter = () => {
+        return (
+            <TouchableOpacity style={styles.button} onPress={() => signOut()}>
+                <Text style={{ color: Color.WHITE, fontSize: 17, fontWeight: '600' }}>LOGOUT</Text>
+            </TouchableOpacity>
+        );
+    };
+
+    const { user, isLoading } = useUser();
+    const { isLoaded, signOut } = useAuth();
+    return (
+        <View style={{ backgroundColor: Color.WHITE, minHeight: '100%', display: 'flex', alignContent: 'center', width: '100%' }}>
+
             <View style={styles.menuCont}>
                 <FlatList
                     data={menu}
+                    ListFooterComponent={ListFooter}
+                    ListHeaderComponent={ListHeader}
                     renderItem={({ item, index }) => (
                         <ProfileMenu item={item} />
                     )}
                 />
             </View>
-            <TouchableOpacity style={styles.button} onPress={() => signOut()}>
-                <Text style={{ color: Color.WHITE, fontSize: 17, fontWeight: '600' }}>LOGOUT</Text>
-            </TouchableOpacity>
-        </ScrollView>
+
+        </View>
     )
 }
 
@@ -87,16 +112,16 @@ const styles = StyleSheet.create({
         display: 'flex',
         // alignItems:'center',
     },
-    button:{
-        padding:10, 
+    button: {
+        padding: 10,
         backgroundColor: Color.PRIMARY,
         borderRadius: 80,
-        alignItems:"center",
-        justifyContent:"center",
+        alignItems: "center",
+        justifyContent: "center",
         elevation: 8,
-        marginTop:20,
-        marginBottom:20,
-       width:'90%',
-       marginLeft:'5%'
-      }
+        marginTop: 20,
+        marginBottom: 20,
+        width: '90%',
+        marginLeft: '5%'
+    }
 })

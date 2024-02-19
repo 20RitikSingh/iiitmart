@@ -3,6 +3,7 @@ import Login from './App/Screens/LoginScreen/Login';
 import { ClerkProvider, SignedIn, SignedOut } from '@clerk/clerk-expo';
 import * as SecureStore from "expo-secure-store"
 import Home from './App/Screens/HomeScreen/Home';
+import { ToastProvider } from 'react-native-toast-notifications'
 import { NavigationContainer } from '@react-navigation/native';
 import TabNavigation from './App/Navigations/TabNavigation';
 
@@ -28,18 +29,20 @@ export default function App() {
 
   return (
     <ClerkProvider tokenCache={tokenCache} publishableKey='pk_test_YW11c2luZy1vcmlvbGUtNTMuY2xlcmsuYWNjb3VudHMuZGV2JA'>
-      <View style={styles.container}>
+      <ToastProvider>
+        <View style={styles.container}>
 
-        <SignedIn>
-          <NavigationContainer>
-            <TabNavigation />
-          </NavigationContainer>
-          {/* <Home /> */}
-        </SignedIn>
-        <SignedOut>
-          <Login />
-        </SignedOut>
-      </View>
+          <SignedIn>
+            <NavigationContainer>
+              <TabNavigation />
+            </NavigationContainer>
+            {/* <Home /> */}
+          </SignedIn>
+          <SignedOut>
+            <Login />
+          </SignedOut>
+        </View>
+      </ToastProvider>
     </ClerkProvider>
   );
 }
@@ -49,6 +52,6 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#fff",
     // paddingTop: 30,
-    marginTop:StatusBar.currentHeight
+    marginTop: StatusBar.currentHeight
   },
 });

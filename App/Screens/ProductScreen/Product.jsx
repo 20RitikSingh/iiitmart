@@ -90,7 +90,6 @@ const ProductPage = () => {
             <Carousel Heading="Similar Products" API={TopDealsAPI} />
           </View>
         </ScrollView>
-        {/* <View style={styles.bottomContainerBuffer}></View> */}
       </View>
       <View style={styles.bottomContainer}>
         <Text style={styles.priceBottom}>
@@ -119,8 +118,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: Color.WHITE,
     paddingBottom: 5,
-    borderBottomLeftRadius: 40,
-    borderBottomRightRadius: 40,
+    
   },
   backButton: {
     position: 'absolute',
@@ -194,12 +192,7 @@ const styles = StyleSheet.create({
     fontSize: 15,
     marginHorizontal: 10,
   },
-  bottomContainerBuffer: {
-    height: 30,
-    backgroundColor: Color.WHITE,
-    borderBottomLeftRadius: 60,
-    borderBottomRightRadius: 60,
-  },
+  
   bottomContainer: {
     flexDirection: "row",
     justifyContent: "space-between",

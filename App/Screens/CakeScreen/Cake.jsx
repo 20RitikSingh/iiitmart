@@ -13,9 +13,21 @@ export default function Cake() {
   useEffect(() => {
     Cakes.getCakes().then((res) => {
       setCakeData(res?.cakes)
-      console.log(res?.cakes)
+      // console.log(res?.cakes)
     })
   }, [])
+
+  const formatData = (data, numColumns) => {
+    const amountFullRows = Math.floor(data?.length / numColumns);
+    let amountItemsLastRow = data?.length - amountFullRows * numColumns;
+  
+    while (amountItemsLastRow !== numColumns && amountItemsLastRow !== 0) {
+      data.push({key: `empty-${amountItemsLastRow}`, empty: true});
+      amountItemsLastRow++;
+    }
+    console.log(data);
+    return data;
+  };
 
 
 
@@ -28,9 +40,10 @@ export default function Cake() {
       </View>
       <View style={styles.cakeCont}>
         <FlatList
-          data={cakeData}
+          data={formatData(cakeData, 2)}
           numColumns={2}
           keyExtractor={(item) => item?.id}
+          style={{backgroundColor:'ff0000'}}
           renderItem={({ item, index }) => {
             // console.log(item)
             return <CakeComp item={item} />
@@ -51,5 +64,10 @@ const styles = StyleSheet.create({
   },
   cakeCont:{
     display:'flex',
+    // backgroundColor:'#ff0000',
+    paddingLeft:'2%',
+    paddingRight:'2%',
+    justifyContent:"space-between", 
+    gap:5
   }
 })

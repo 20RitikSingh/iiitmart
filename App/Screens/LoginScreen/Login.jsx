@@ -2,7 +2,7 @@ import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native'
 import React from 'react'
 import * as WebBrowser from "expo-web-browser";
 import color from '../../../utils/Color'
-import { useOAuth } from "@clerk/clerk-expo";
+import { useOAuth, useUser } from "@clerk/clerk-expo";
 import { useWarmUpBrowser } from '../../hooks/warmUpBrowser';
 WebBrowser.maybeCompleteAuthSession();
 export default function Login() {
