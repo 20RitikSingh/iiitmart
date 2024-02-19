@@ -1,9 +1,11 @@
 import { View, Text, FlatList, Image, StyleSheet, TouchableOpacity } from 'react-native'
 import React, { useEffect, useState } from 'react'
-// import TopDealsAPI from '../../../utils/TopDealsAPI'
+import TopDealsAPI from '../../../utils/TopDealsAPI'
 import Color from '../../../utils/Color'
-
+import { useNavigation } from '@react-navigation/native';
 export default function Carousel({ Heading, API }) {
+  const navigation = useNavigation();
+
   const [carouselData, setCarouselData] = useState([])
   useEffect(() => {
     API().then((res) => {
@@ -25,7 +27,11 @@ export default function Carousel({ Heading, API }) {
         renderItem={({ item, index }) => (
           <View style={styles.productContainer}>
             <View style={styles.productImageContainer}>
-              <Image source={{ uri: item?.images[0]?.url }} style={styles.productImage} />
+              <TouchableOpacity onPress={() => {
+                navigation.navigate("Product",{item});
+                }}>
+                <Image source={{ uri: item?.images[0]?.url }} style={styles.productImage} />
+              </TouchableOpacity>
             </View>
             <Text style={styles.productTitle}>{
               (item?.name.length > 20) ? item?.name.slice(0, 20) + ' ...' : item?.name}</Text>
