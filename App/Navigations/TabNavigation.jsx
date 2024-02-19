@@ -14,6 +14,8 @@ import Cake from '../Screens/CakeScreen/Cake';
 import Cart from '../Screens/CartScreen/Cart';
 
 import Product from '../Screens/ProductScreen/Product';
+import Orders from '../Screens/OrdersScreen/Orders';
+import OrderDetails from '../Screens/OrdersScreen/OrderDetails';
 import CheckOut from '../Screens/CheckOutScreen/CheckOut';
 import SearchScreen from '../Components/SearchBar/SearchScreen';
 import HomeStack from '../Screens/HomeScreen/HomeStack';
