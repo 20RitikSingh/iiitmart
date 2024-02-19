@@ -46,7 +46,7 @@ export default function CakeBanner() {
 
     useEffect(() => {
       CakeBanners.getCakeBanners().then((res) => {
-        console.log(res)
+        // console.log(res)
         setBanners(res?.cakeBanners)
       })
     }, [])
