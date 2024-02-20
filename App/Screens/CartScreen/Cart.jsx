@@ -13,8 +13,9 @@ import CartAPI from "../../../utils/CartAPI.js";
 import Color from "../../../utils/Color";
 import { ClerkLoading, useClerk } from '@clerk/clerk-react';
 import { useIsFocused } from '@react-navigation/native';
-
+import { useNavigation } from '@react-navigation/native';
 export default function Cart() {
+  const navigation = useNavigation();
   const [cartData, setCartData] = useState([]);
   const [productData, setProductData] = useState([]);
   const [totalAmount, setTotalAmount] = useState(0);
@@ -113,7 +114,10 @@ export default function Cart() {
         showsVerticalScrollIndicator={false}
       />
       <View style={styles.fixedBottomView}>
-        <Text>Total Amount - {totalAmount}</Text>
+        <Text>Total Bill - ₹{totalAmount}</Text>
+        <TouchableOpacity style={styles.checkout} onPress={()=>navigation.navigate('OrdersDetailsPage',{cartData})}>
+        <Text style={{ color:Color.TER,fontWeight:600,fontSize:16}}>Checkout</Text>
+        </TouchableOpacity>
       </View>
     </ScrollView>
   );
@@ -185,9 +189,18 @@ const styles = StyleSheet.create({
     bottom: 0,
     left: 0,
     right: 0,
-    backgroundColor: "white", // Set background color or styles as needed
+    backgroundColor: Color.LIGHT_GREY, 
+    display: "flex",
+    justifyContent:'center',
     padding: 16,
     borderTopWidth: 1,
-    borderTopColor: Color.BLACK, // Add a border if needed
+
+  },
+  checkout: {
+    backgroundColor: Color.PRIMARY,
+    padding: 10,
+    borderRadius: 10,
+    alignItems: "center",
+   
   },
 });
