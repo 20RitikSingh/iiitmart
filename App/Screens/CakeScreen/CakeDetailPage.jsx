@@ -16,12 +16,13 @@ import TopDealsAPI from "../../../utils/TopDealsAPI";
 import { Ionicons } from "@expo/vector-icons";
 import SearchBar from "../../Components/SearchBar/SearchBar";
 import { useNavigation } from "@react-navigation/native";
-
 import addToCart from "../CartScreen/addToCart";
 import { useClerk } from "@clerk/clerk-react";
+import Cakes from "../../../utils/Cakes";
 
-const ProductPage = ({ route }) => {
-  const {user} = useClerk();
+
+const CakeDetailPage = ({ route }) => {
+  const { user } = useClerk();
   const [quantity, setQuantity] = useState(1);
   const [selected, setSelected] = React.useState("");
   const product = route.params.item;
@@ -31,7 +32,6 @@ const ProductPage = ({ route }) => {
       setQuantity(value);
     }
   };
-
   const navigation = useNavigation();
 
   const handleVariantSelect = (variant) => {
@@ -46,13 +46,11 @@ const ProductPage = ({ route }) => {
         <ScrollView style={styles.ScrollView}>
           <View style={styles.carouselContainer}>
             <Swiper style={styles.wrapper} activeDotColor={Color.TER}>
-              {product.images.map((image, index) => (
-                <Image
-                  key={index}
-                  source={{ uri: image.url }}
-                  style={styles.image}
-                />
-              ))}
+              <Image
+                key={product.name}
+                source={{ uri: product.image.url }}
+                style={styles.image}
+              />
             </Swiper>
             <TouchableOpacity
               style={styles.backButton}
@@ -89,13 +87,8 @@ const ProductPage = ({ route }) => {
             </View>
             <Text style={styles.description}>{product?.description}</Text>
             {/* Product variants dropdown */}
-            {/* <SelectList
-              search={false}
-              setSelected={(val) => setSelected(val)}
-              data={product?.variants}
-              save="value"
-            /> */}
-            <Carousel Heading="Similar Products" API={TopDealsAPI} />
+            
+            {/* <Carousel Heading="Similar Products" API={Cakes.getCakes} /> */}
           </View>
         </ScrollView>
       </View>
@@ -103,10 +96,8 @@ const ProductPage = ({ route }) => {
         <Text style={styles.priceBottom}>
           Price: ₹{(product.price * quantity).toFixed(2)}
         </Text>
-
-        <TouchableOpacity style={styles.button} onPress={()=>addToCart(user.id,product,quantity)}>
+        <TouchableOpacity style={styles.button} onPress={() => addToCart(user.id, product, quantity)}>
           <Text style={styles.buttonText} >Add to Cart</Text>
-
         </TouchableOpacity>
       </View>
     </View>
@@ -169,7 +160,6 @@ const styles = StyleSheet.create({
     padding: 20,
   },
   title: {
-    width: "70%",
     fontSize: 24,
     fontWeight: "bold",
     marginBottom: 10,
@@ -226,4 +216,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ProductPage;
+export default CakeDetailPage;
