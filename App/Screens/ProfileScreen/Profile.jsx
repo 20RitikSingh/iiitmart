@@ -1,4 +1,5 @@
-import { View, Text, Image, StyleSheet, FlatList, ScrollView, TouchableOpacity } from 'react-native'
+import { View, Text, Image, StyleSheet, FlatList, TouchableOpacity } from 'react-native'
+import { ScrollView } from 'react-native-virtualized-view'
 import React from 'react'
 import Color from '../../../utils/Color'
 import { useAuth, useUser } from '@clerk/clerk-expo'
