@@ -1,15 +1,18 @@
-import { View, Text, ScrollView, StyleSheet, FlatList, Image } from 'react-native'
+import { View, Text, ScrollView, StyleSheet, FlatList, Image, TouchableOpacity } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import Color from '../../../utils/Color'
 import { useUser } from '@clerk/clerk-expo'
 import OrdersAPI from '../../../utils/OrdersAPI';
+import { Ionicons } from '@expo/vector-icons';
 import OrderItem from '../../Components/OrderItem/OrderItem';
+import { useNavigation } from '@react-navigation/native';
 
 
 export default function Orders() {
 
     const [orders, setOrders] = useState([]);
     const { user } = useUser();
+    const navigation = useNavigation();
 
     useEffect(() => {
 
@@ -23,7 +26,17 @@ export default function Orders() {
     // console.log(orders.length);
     return (
         <ScrollView>
-            <Text style={styles.heading}>Orders</Text>
+            <View style={styles.headingCont}>
+                <Text style={styles.heading}>
+                    Order Details
+                </Text>
+                <TouchableOpacity style={styles.backButton} onPress={() => {
+                navigation.goBack();
+              }}>
+                    <Text><Ionicons name="arrow-back" size={24} color='white' /></Text>
+                </TouchableOpacity>
+            </View>
+            {/* <Text style={styles.heading}>Orders</Text> */}
             {orders.length ?
                 <View style={styles.listContainer}>
                     <FlatList
@@ -31,25 +44,6 @@ export default function Orders() {
                         renderItem={({ item, index }) => {
                             // console.log(item);
                             return <OrderItem item={item} />
-                            //    return <Text>{item.date}</Text>
-                            // return (
-                            //     <View style={styles.container}>
-                            //         <Image source={{ uri: item.orderItems[0]?.product?.images[0].url }} style={styles.image} />
-                            //         <View style={styles.rightContainer}>
-                            //             <View style={{ display: 'flex', justifyContent: 'space-between', flexDirection: 'column', alignItems: 'flex-start' }}>
-                            //                 <Text style={styles.delivered}>{item.delivered ? 'Delivered  ' : 'Ordered '}
-                            //                     {/* <Ionicons name={item.delivered ? "checkmark-done-sharp" : "checkmark-outline"} size={15} color='blue' /> */}
-                            //                 </Text>
-                            //                 {/* <Text style={styles.delivered}>{order.delivered ? 'Delivered' : 'Ordered'}</Text> */}
-                            //                 <Text style={styles.date}>Delivered on: {item.date}</Text>
-                            //             </View>
-                            //             <View style={{ display: 'flex', justifyContent: 'space-between', flexDirection: 'row', alignItems: 'center', marginTop: 2 }}>
-                            //                 <Text style={styles.quantity}>{item.orderItems.length} items</Text>
-                            //                 <Text style={styles.price}>₹ {item.total}</Text>
-                            //             </View>
-                            //         </View>
-                            //     </View>
-                            // )
                         }}
                         keyExtractor={(item, index) => item.id}
                     />
@@ -71,7 +65,9 @@ const styles = StyleSheet.create({
         color: Color.WHITE,
         fontSize: 30,
         fontWeight: "normal",
-        padding: 15
+        padding: 15,
+        paddingLeft: 10,
+        flex: 1
     },
     listContainer: {
         width: '100%',
@@ -85,5 +81,18 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
     },
-    
+    backButton: {
+        width: 30,
+        backgroundColor: Color.PRIMARY,
+        display: 'flex',
+        //    alignItems: 'center',
+        justifyContent: 'center',
+        paddingLeft: 4,
+        paddingRight: 4
+
+    },
+    headingCont: {
+        display: 'flex',
+        flexDirection: 'row-reverse',
+    }
 })
