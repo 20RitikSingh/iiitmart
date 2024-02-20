@@ -58,26 +58,47 @@ const styles = StyleSheet.create({
     borderColor: Color.GREY,
     borderWidth: 1,
     borderRadius: 10,
-    width: '44%',
-    margin: '4%',
+    width: "44%",
+    margin: "4%",
     flex: 1,
-    height: 'auto',
+    height: "auto",
     paddingBottom: 5,
-    overflow: 'hidden',
+    overflow: "hidden",
   },
   cakeImageContainer: {
-    alignItems: 'center',
+    alignItems: "center",
   },
   cakeImage: {
-    width: '100%',
+    width: "100%",
     height: 140,
   },
   cakeTitle: {
-    fontWeight: 'bold',
+    fontWeight: "bold",
     fontSize: 16,
-    textAlign: 'left',
+    textAlign: "left",
     lineHeight: 20,
     padding: 4,
+  },
+  quantityContainer: {
+    marginLeft: "auto",
+    flexDirection: "row",
+    alignItems: "center",
+    marginBottom: 10,
+    marginTop: 10,
+  },
+  quantityButton: {
+    borderRadius: 50,
+    height: 20,
+    width: 20,
+    fontSize: 10,
+    color: Color.WHITE,
+    fontWeight: "bold",
+    textAlign: "center",
+    backgroundColor: Color.TER,
+  },
+  quantity: {
+    fontSize: 10,
+    marginHorizontal: 10,
   },
   cakeDesc: {
     // fontWeight: '',
@@ -89,10 +110,10 @@ const styles = StyleSheet.create({
     color: Color.GREY,
   },
   cakePrice: {
-    fontWeight: 'semibold',
+    fontWeight: "semibold",
     color: Color.TER,
     padding: 4,
-    fontSize: 16
+    fontSize: 16,
   },
   addToCart: {
     padding: 1,
@@ -112,9 +133,9 @@ const styles = StyleSheet.create({
     marginLeft: 5,
   },
   cartCont: {
-    display: 'flex',
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center'
-  }
-})
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+});
