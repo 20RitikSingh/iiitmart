@@ -3,10 +3,10 @@ import {
   Text,
   StyleSheet,
   Image,
-  ScrollView,
   FlatList,
   TouchableOpacity,
 } from "react-native";
+import { ScrollView } from 'react-native-virtualized-view'
 import React, { useEffect, useState } from "react";
 import getTopDeals from "../../../utils/TopDealsAPI";
 import getCustomers from "../../../utils/CustomerAPI";

@@ -1,4 +1,5 @@
-import { FlatList, ScrollView, StyleSheet, Text, View } from 'react-native'
+import { FlatList, StyleSheet, Text, View } from 'react-native'
+import { ScrollView } from 'react-native-virtualized-view'
 import React, { useEffect, useState } from 'react'
 import SearchBar from '../../Components/SearchBar/SearchBar'
 import Color from '../../../utils/Color'
