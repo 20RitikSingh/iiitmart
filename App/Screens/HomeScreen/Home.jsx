@@ -12,7 +12,6 @@ export default function Home({ route }) {
   return (
     <ScrollView style={{backgroundColor: Color.WHITE}} >
       <SearchBar navigation={route}/>
-      {/* <SearchBar /> */}
       <Banner />
       <TopDeals/>
       <Categories/>
