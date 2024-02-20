@@ -56,7 +56,7 @@ export default function SearchScreen({navigation}) {
   }
   else return (
     <ScrollView>
-      <View style={{display:'flex',flexDirection:'row' ,alignItems:'center',backgroundColor:Color.PRIMARY}}>
+      <View style={styles.searchBar}>
       <TouchableOpacity style={{padding:4}} onPress={()=>{navigation.navigate('Home')}}>
         <FontAwesome name="arrow-left" size={20} color={Color.WHITE} />
       </TouchableOpacity>
@@ -91,6 +91,15 @@ export default function SearchScreen({navigation}) {
 }
 
 const styles = StyleSheet.create({
+  searchBar: {
+    
+    width: '100%',
+    display:'flex',
+    flexDirection:'row',
+    alignItems:'center',
+    backgroundColor:Color.PRIMARY,
+    
+  },
   searchItem:{
     display:'flex',
     flexDirection:'row',

@@ -3,37 +3,22 @@ async function getCustomers(){
     const MASTER_URL = 'https://api-ap-south-1.hygraph.com/v2/clsj4vqoa000008l18w0o8mis/master';
     const query = gql`
     query getCustomers {
-        customers {
-          clerkId
-          cart {
-            cartorder {
-              ... on OrderItem {
-                id
-                product {
-                  images {
-                    url
-                  }
-                  price
-                  variants {
-                    ... on ProductColorVariant {
-                      id
-                      name
-                    }
-                    ... on ProductSizeColorVariant {
-                      id
-                      name
-                      color
-                    }
-                    ... on ProductSizeVariant {
-                      id
-                      name
-                    }
-                  }
-                }
+      customers {
+        clerkId
+        cart {
+          total
+          cartItems {
+            quantity
+            product {
+              images {
+                url
               }
+              price
+              name
             }
           }
         }
+      }
       }
       
     `

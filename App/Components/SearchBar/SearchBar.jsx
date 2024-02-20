@@ -2,7 +2,9 @@ import { View,StyleSheet, TextInput, SafeAreaView, TouchableOpacity } from 'reac
 import React,{useEffect, useState} from 'react'
 import Color from '../../../utils/Color'
 import { FontAwesome } from '@expo/vector-icons';
-export default function SearchBar({navigation}) {
+import { useNavigation } from '@react-navigation/native'
+export default function SearchBar() {
+  const navigation = useNavigation();
   const [searchQuery,setSearchQuery] = useState('')
    return (
     <View style={{display:'flex',alignItems:'center', backgroundColor:Color.PRIMARY}}>

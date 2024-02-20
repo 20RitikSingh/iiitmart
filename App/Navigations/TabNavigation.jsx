@@ -17,8 +17,7 @@ import Product from '../Screens/ProductScreen/Product';
 import Orders from '../Screens/OrdersScreen/Orders';
 import OrderDetails from '../Screens/OrdersScreen/OrderDetails';
 import CheckOut from '../Screens/CheckOutScreen/CheckOut';
-import SearchScreen from '../Components/SearchBar/SearchScreen';
-import HomeStack from '../Screens/HomeScreen/HomeStack';
+
 
 const Tab = createBottomTabNavigator();
 
@@ -33,7 +32,7 @@ export default function TabNavigation() {
         tabBarHideOnKeyboard:true,
         tabBarStyle:{backgroundColor: Color.PRIMARY}
     }}>
-      <Tab.Screen name="Home" component={HomeStack } 
+      <Tab.Screen name="Home" component={Home} 
         options={{
             // tabBarLabel: ({ color = 'black' }) => (
             //     <Text style={{color:color, fontSize:12, marginTop:-7}}>HOME</Text>

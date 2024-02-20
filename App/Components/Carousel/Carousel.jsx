@@ -3,7 +3,12 @@ import React, { useEffect, useState } from 'react'
 import TopDealsAPI from '../../../utils/TopDealsAPI'
 import Color from '../../../utils/Color'
 import { useNavigation } from '@react-navigation/native';
+import addToCart from '../../Screens/CartScreen/addToCart';
+import { useClerk } from '@clerk/clerk-react';
 export default function Carousel({ Heading, API }) {
+  //to be fetched in top level component in future & then passed as props or saved in store
+  const {user} = useClerk();
+
   const navigation = useNavigation();
 
   const [carouselData, setCarouselData] = useState([])
@@ -20,7 +25,6 @@ export default function Carousel({ Heading, API }) {
     <View>
       <View style={styles.headingContainer}>
         <Text style={styles.heading}>{Heading}</Text>
-
       </View>
       <FlatList
         data={carouselData}
@@ -37,7 +41,7 @@ export default function Carousel({ Heading, API }) {
               (item?.name.length > 20) ? item?.name.slice(0, 20) + ' ...' : item?.name}</Text>
             <View style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
               <Text style={styles.productPrice}>₹{item?.price}</Text>
-              <TouchableOpacity style={styles.addToCart}><Text style={{ fontSize: 10 }}>ADD</Text></TouchableOpacity>
+              <TouchableOpacity style={styles.addToCart} onPress={()=>addToCart(user,item)}><Text style={{ fontSize: 10 }}>ADD</Text></TouchableOpacity>
             </View>
           </View>
         )}
