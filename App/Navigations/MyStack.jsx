@@ -6,6 +6,7 @@ import Carousel from '../Components/Carousel/Carousel';
 import Orders from '../Screens/OrdersScreen/Orders';
 import OrderDetails from '../Screens/OrdersScreen/OrderDetails';
 import SearchScreen from '../Components/SearchBar/SearchScreen';
+import CakeDetailPage from '../Screens/CakeScreen/CakeDetailPage';
 
 const Stack = createNativeStackNavigator();
 
@@ -17,6 +18,7 @@ function MyStack() {
       <Stack.Screen name="OrdersPage" component={Orders} />
       <Stack.Screen name="OrdersDetailsPage" component={OrderDetails} />
       <Stack.Screen name="Search" component={SearchScreen} />
+      <Stack.Screen name="CakeDetailPage" component={CakeDetailPage} />
       {/* <Stack.Screen name="Crousel" component={Carousel} /> */}
       {/* <Stack.Screen name="Settings" component={Settings} /> */}
     </Stack.Navigator>
