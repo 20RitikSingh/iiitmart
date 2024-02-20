@@ -31,7 +31,6 @@ const ProductPage = ({ route }) => {
       setQuantity(value);
     }
   };
-  const {user} = useClerk();
 
   const navigation = useNavigation();
 
