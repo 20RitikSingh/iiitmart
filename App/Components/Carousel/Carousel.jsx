@@ -41,7 +41,7 @@ export default function Carousel({ Heading, API }) {
               (item?.name.length > 20) ? item?.name.slice(0, 20) + ' ...' : item?.name}</Text>
             <View style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
               <Text style={styles.productPrice}>₹{item?.price}</Text>
-              <TouchableOpacity style={styles.addToCart} onPress={()=>addToCart(user,item)}><Text style={{ fontSize: 10 }}>ADD</Text></TouchableOpacity>
+              <TouchableOpacity style={styles.addToCart} onPress={()=>addToCart(user.id,item,1)}><Text style={{ fontSize: 10 }}>ADD</Text></TouchableOpacity>
             </View>
           </View>
         )}
