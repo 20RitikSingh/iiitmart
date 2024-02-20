@@ -16,6 +16,7 @@ import TopDealsAPI from "../../../utils/TopDealsAPI";
 import { Ionicons } from "@expo/vector-icons";
 import SearchBar from "../../Components/SearchBar/SearchBar";
 import { useNavigation } from "@react-navigation/native";
+import { useClerk } from "@clerk/clerk-react";
 const addToCart = () => {};
 const ProductPage = ({ route }) => {
   const [quantity, setQuantity] = useState(1);
@@ -26,6 +27,8 @@ const ProductPage = ({ route }) => {
       setQuantity(value);
     }
   };
+  const {user} = useClerk();
+
   const navigation = useNavigation();
 
   const handleVariantSelect = (variant) => {
@@ -83,12 +86,12 @@ const ProductPage = ({ route }) => {
             </View>
             <Text style={styles.description}>{product?.description}</Text>
             {/* Product variants dropdown */}
-            <SelectList
+            {/* <SelectList
               search={false}
               setSelected={(val) => setSelected(val)}
               data={product?.variants}
               save="value"
-            />
+            /> */}
             <Carousel Heading="Similar Products" API={TopDealsAPI} />
           </View>
         </ScrollView>
@@ -97,7 +100,7 @@ const ProductPage = ({ route }) => {
         <Text style={styles.priceBottom}>
           Price: ₹{(product.price * quantity).toFixed(2)}
         </Text>
-        <TouchableOpacity style={styles.button} onPress={addToCart}>
+        <TouchableOpacity style={styles.button} onPress={()=>addToCart(user,product)}>
           <Text style={styles.buttonText}>Add to Cart</Text>
         </TouchableOpacity>
       </View>
@@ -161,6 +164,7 @@ const styles = StyleSheet.create({
     padding: 20,
   },
   title: {
+    width: "70%",
     fontSize: 24,
     fontWeight: "bold",
     marginBottom: 10,
