@@ -16,12 +16,16 @@ import TopDealsAPI from "../../../utils/TopDealsAPI";
 import { Ionicons } from "@expo/vector-icons";
 import SearchBar from "../../Components/SearchBar/SearchBar";
 import { useNavigation } from "@react-navigation/native";
+
+import addToCart from "../CartScreen/addToCart";
 import { useClerk } from "@clerk/clerk-react";
-const addToCart = () => {};
+
 const ProductPage = ({ route }) => {
+  const {user} = useClerk();
   const [quantity, setQuantity] = useState(1);
   const [selected, setSelected] = React.useState("");
   const product = route.params.item;
+  console.log(product)
   const handleQuantityChange = (value) => {
     if (value >= 1) {
       setQuantity(value);
@@ -100,8 +104,10 @@ const ProductPage = ({ route }) => {
         <Text style={styles.priceBottom}>
           Price: ₹{(product.price * quantity).toFixed(2)}
         </Text>
-        <TouchableOpacity style={styles.button} onPress={()=>addToCart(user,product)}>
-          <Text style={styles.buttonText}>Add to Cart</Text>
+
+        <TouchableOpacity style={styles.button} onPress={()=>addToCart(user.id,product,quantity)}>
+          <Text style={styles.buttonText} >Add to Cart</Text>
+
         </TouchableOpacity>
       </View>
     </View>

@@ -8,46 +8,39 @@ import {
 } from "react-native";
 import { ScrollView } from 'react-native-virtualized-view'
 import React, { useEffect, useState } from "react";
-import getTopDeals from "../../../utils/TopDealsAPI";
-import getCustomers from "../../../utils/CustomerAPI";
-import Color from "../../../utils/Color";
-import { useClerk } from '@clerk/clerk-react';
+import CartAPI from "../../../utils/CartAPI.js";
 
+import Color from "../../../utils/Color";
+import { ClerkLoading, useClerk } from '@clerk/clerk-react';
+import { useIsFocused } from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
 export default function Cart() {
+  const navigation = useNavigation();
+  const [cartData, setCartData] = useState([]);
   const [productData, setProductData] = useState([]);
   const [totalAmount, setTotalAmount] = useState(0);
   const { user } = useClerk();
-    
-//   useEffect(() => {
-//     getTopDeals().then((res) => {
-//       const productsWithQuantity = res?.products.map((product) => ({
-//         ...product,
-//         quantity: 0,
-//       }));
-//       setProductData(productsWithQuantity);
-//     });
-//   }, []);
+  const isFocused = useIsFocused();
+  // useEffect(() => {
+  //   getTopDeals().then((res) => {
+  //     const productsWithQuantity = res?.products.map((product) => ({
+  //       ...product,
+  //       quantity: 0,
+  //     }));
+  //     setcartData(productsWithQuantity);
+  //   });
+  // }, []);
 
 
-//finding the current user in hygraph db
+//finding the current cart in hygraph db
 
-    // useEffect(() => {
-    //     getCustomers().then((res) => {
-    //         const customers = res?.customers;
-    //         const currentUser = customers.find((customer) => customer.clerkId === user.id);
-    //         console.log(currentUser)
-        //     const productsWithQuantity = currentUser?.cart?.cartorder.map((product) => ({
-        //         ...product,
-        //         quantity: 0,
-        //     }));
-        //     setProductData(productsWithQuantity);
-    //     });
-    // }, [user]);
-
-
-
-
-
+    useEffect(() => {
+      console.log(CartAPI.GetCartByClerkID(user.id))
+      CartAPI.GetCartByClerkID(user.id).then((res) => {
+      setCartData(res?.cart?.cartItems);
+        console.log(cartData)
+      });  
+    }, [isFocused]);
 
   useEffect(() => {
     let sum = 0
@@ -55,20 +48,21 @@ export default function Cart() {
         sum += product.quantity * product.price
     });
     setTotalAmount(sum)
-  }, [productData]);
+  }, [cartData]);
 
   const CartProduct = ({ item }) => {
     return (
     <View style={styles.wrapper}>
       <View style={styles.product}>
-        <Image source={{ uri: item.images[0].url }} style={styles.productImage} /> 
+        <Image source={{ uri: item?.product?.images[0].url }} style={styles.productImage} /> 
           <View style={styles.productDetails}>
-            <Text style={styles.productTitle}>
-              {item?.name.length > 40
-                ? item?.name.slice(0, 40) + " ..."
-                : item?.name}
+            <Text style={styles.productTitle} numberOfLines={2}>
+              {/* {item?.product.name.length > 40
+                ? item?.product.name.slice(0, 40) + " ..."
+                : item?.product.name} */}
+                {item.product.name}
             </Text>
-            <Text style={styles.price}>₹{item.price}</Text>
+            <Text style={styles.price}>₹{item.product.price}</Text>
           </View>
       </View>
       <View style={styles.quantitySelectorWrapper}>
@@ -78,7 +72,7 @@ export default function Cart() {
                 style={styles.button}
                 onPress={() => {
                   // Decrease the quantity for the specific product, ensuring it doesn't go below 0
-                  setProductData((prevData) =>
+                  setCartData((prevData) =>
                     prevData.map((product) => {
                       if (product.id === item.id && product.quantity > 0) {
                         return { ...product, quantity: product.quantity - 1 };
@@ -94,7 +88,7 @@ export default function Cart() {
               <TouchableOpacity
                 style={styles.button}
                 onPress={() => {
-                  setProductData((prevData) =>
+                  setCartData((prevData) =>
                     prevData.map((product) => {
                       if (product.id === item.id) {
                         return { ...product, quantity: product.quantity + 1 };
@@ -115,12 +109,15 @@ export default function Cart() {
     <ScrollView>
       <Text style={styles.heading}>{user.firstName}'s Cart</Text>
       <FlatList
-        data={productData}
+        data={cartData}
         renderItem={CartProduct}
         showsVerticalScrollIndicator={false}
       />
       <View style={styles.fixedBottomView}>
-        <Text>Total Amount - {totalAmount}</Text>
+        <Text>Total Bill - ₹{totalAmount}</Text>
+        <TouchableOpacity style={styles.checkout} onPress={()=>navigation.navigate('OrdersDetailsPage',{cartData})}>
+        <Text style={{ color:Color.TER,fontWeight:600,fontSize:16}}>Checkout</Text>
+        </TouchableOpacity>
       </View>
     </ScrollView>
   );
@@ -159,6 +156,7 @@ const styles = StyleSheet.create({
 
   },
   productTitle:{
+    width:'100%',
     fontSize: 18,
     fontWeight:'500'
   },
@@ -191,9 +189,18 @@ const styles = StyleSheet.create({
     bottom: 0,
     left: 0,
     right: 0,
-    backgroundColor: "white", // Set background color or styles as needed
+    backgroundColor: Color.LIGHT_GREY, 
+    display: "flex",
+    justifyContent:'center',
     padding: 16,
     borderTopWidth: 1,
-    borderTopColor: Color.BLACK, // Add a border if needed
+
+  },
+  checkout: {
+    backgroundColor: Color.PRIMARY,
+    padding: 10,
+    borderRadius: 10,
+    alignItems: "center",
+   
   },
 });

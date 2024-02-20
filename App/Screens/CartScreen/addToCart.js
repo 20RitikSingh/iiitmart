@@ -1,14 +1,14 @@
+import CartAPI from "../../../utils/CartAPI";
+export default function addToCart(userId,product,quantity) {
+    console.log('sdajk')
+    try{
+        CartAPI.UpdateCart(product.id,quantity,userId).then((res) => {
+            console.log(res)
+        })
+    }
+    catch(error) {
+        console.log(error)
+    }
 
-import getCustomers from "../../../utils/CustomerAPI";
-export default function addToCart(user,item) {
   
-       getCustomers().then((res) => {
-           const customers = res?.customers;
-           const currentUser = customers.find((customer) => customer.clerkId === user.id);
-        console.log(currentUser)
-        const userCart = currentUser?.cart
-        console.log(userCart)
-       });
-  
-
 }

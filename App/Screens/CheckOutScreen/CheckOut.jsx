@@ -59,7 +59,7 @@ const cartData={
 import Color from '../../../utils/Color';
 import { Ionicons } from '@expo/vector-icons';
 
-  const OrderSummaryPage = ({ route }) => {
+  const OrderSummaryPage = ({ route,cartData }) => {
     const { cartItems, totalAmount } = cartData;
     const { name, address, phoneNumber, email } = {"name":"Rahul","address":"Delhi","phoneNumber":"1234567890","email":"example emaoil"};
     const renderProductItem = ({ item }) => (
