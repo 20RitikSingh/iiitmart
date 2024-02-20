@@ -44,4 +44,16 @@ async function UpdateCart( id, quantity, clerkid) {
     return res
 }
 
-export default { GetCartByClerkID,UpdateCart }
+async function updateCartItemQuantity( cartItemID, quantity) {
+    const MASTER_URL = 'https://api-ap-south-1.hygraph.com/v2/clsj4vqoa000008l18w0o8mis/master';
+    const query = gql`
+    mutation updateCartItemQuantity {
+        updateCartItem(where: {id: "`+cartItemID+`"}, data: {quantity: `+ quantity +`}) {
+          id
+        }
+      }
+    `
+    const res = await request(MASTER_URL, query)
+    return res
+}
+export default { GetCartByClerkID,UpdateCart,updateCartItemQuantity }

@@ -71,15 +71,11 @@ export default function Cart() {
               <TouchableOpacity
                 style={styles.button}
                 onPress={() => {
-                  // Decrease the quantity for the specific product, ensuring it doesn't go below 0
-                  setCartData((prevData) =>
-                    prevData.map((product) => {
-                      if (product.id === item.id && product.quantity > 0) {
-                        return { ...product, quantity: product.quantity - 1 };
-                      }
-                      return product;
+                  if(item.quantity>0){
+                    CartAPI.updateCartItemQuantity(item.id,item.quantity-1).then((res) => {
+                    console.log(res)
                     })
-                  );
+                  }
                 }}
               >
                 <Text style={{fontSize:20}}>-</Text>
@@ -88,14 +84,9 @@ export default function Cart() {
               <TouchableOpacity
                 style={styles.button}
                 onPress={() => {
-                  setCartData((prevData) =>
-                    prevData.map((product) => {
-                      if (product.id === item.id) {
-                        return { ...product, quantity: product.quantity + 1 };
-                      }
-                      return product;
-                    })
-                  );
+               CartAPI.updateCartItemQuantity(item.id,item.quantity+1).then((res) => {
+
+               })
                 }}
               >
                 <Text style={{fontSize:20}} >+</Text>
