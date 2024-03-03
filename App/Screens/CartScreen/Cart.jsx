@@ -60,9 +60,9 @@ export default function Cart() {
               {/* {item?.product.name.length > 40
                 ? item?.product.name.slice(0, 40) + " ..."
                 : item?.product.name} */}
-                {item.product.name}
+                {item.product?.name}
             </Text>
-            <Text style={styles.price}>₹{item.product.price}</Text>
+            <Text style={styles.price}>₹{item.product?.price}</Text>
           </View>
       </View>
       <View style={styles.quantitySelectorWrapper}>
