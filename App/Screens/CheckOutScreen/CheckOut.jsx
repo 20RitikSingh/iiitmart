@@ -1,77 +1,47 @@
-const cartData={
-    "cartItems": [
-      {
-        "id": 1,
-        "name": "Product 1",
-        "price": 50,
-        "image": "https://example.com/product1.jpg",
-        "quantity": 2
-      },
-      {
-        "id": 2,
-        "name": "Product 2",
-        "price": 30,
-        "image": "https://example.com/product2.jpg",
-        "quantity": 1
-      },
-      {
-        "id": 2,
-        "name": "Product 2",
-        "price": 30,
-        "image": "https://example.com/product2.jpg",
-        "quantity": 1
-      },
-      {
-        "id": 2,
-        "name": "Product 2",
-        "price": 30,
-        "image": "https://example.com/product2.jpg",
-        "quantity": 1
-      },
-      {
-        "id": 2,
-        "name": "Product 2",
-        "price": 30,
-        "image": "https://example.com/product2.jpg",
-        "quantity": 1
-      },
-      {
-        "id": 2,
-        "name": "Product 2",
-        "price": 30,
-        "image": "https://example.com/product2.jpg",
-        "quantity": 1
-      },
-      {
-        "id": 3,
-        "name": "Product 3",
-        "price": 20,
-        "image": "https://example.com/product3.jpg",
-        "quantity": 3
-      }
-    ],
-    "totalAmount": 170
-  }
-;  
 
-  import React from 'react';
+  import React, { useEffect, useState } from 'react';
   import { View, Text, StyleSheet, FlatList, Image, TouchableOpacity } from 'react-native';
 import Color from '../../../utils/Color';
 import { Ionicons } from '@expo/vector-icons';
+import { useAuth, useUser } from '@clerk/clerk-react';
+import { useNavigation } from '@react-navigation/native';
+import Customer from '../../../utils/Customer';
+import CartAPI from '../../../utils/CartAPI';
+import Payment from './Payment';
+import createOrder from './Payment';
 
-  const OrderSummaryPage = ({ route,cartData }) => {
-    const { cartItems, totalAmount } = cartData;
-    const { name, address, phoneNumber, email } = {"name":"Rahul","address":"Delhi","phoneNumber":"1234567890","email":"example emaoil"};
+  const OrderSummaryPage = ({ route }) => {
+    const navigation = useNavigation();
+    const [cartData, setCartData] = useState();
+    const { user, isLoading } = useUser();
+    const { isLoaded, signOut } = useAuth();
+    const [address, setAddress] = useState("");
+    const [phoneNumber, setPhoneNumber] = useState("");
+    const { name, email } = {"name": user?.fullName,"email":user?.primaryEmailAddress.emailAddress};
+    
+
+    useEffect(() => {
+      CartAPI.GetCartByClerkID(user.id).then((res) => {
+        setCartData(res);
+      });
+
+      Customer.getUserbyId(user.id).then((res) => {
+          setAddress(res?.customer?.address);
+          setPhoneNumber(res?.customer?.number);
+          
+      })
+  }, [])
     const renderProductItem = ({ item }) => (
         <View style={styles.productContainer}>
-          <Image source={{ uri: item.image }} style={styles.productImage} />
+          <Image source={{ uri: item.product?.images[0].url}} style={styles.productImage} />
           <View style={styles.productDetails}>
-            <Text style={styles.productName}>{item.name}</Text>
-            <Text style={styles.productPrice}>₹{item.price.toFixed(2)}</Text>
-            <Text style={styles.productQuantity}>Quantity: {item.quantity}</Text>
+            <Text style={styles.productName}>{item.product?.name}</Text>
+            <Text style={styles.productPrice}>₹{item.product?.price}</Text>
+            <Text style={styles.productQuantity}>Quantity: {item?.quantity}</Text>
           </View>
         </View>
       );
+
     
       return (
         <View style={styles.container}>
@@ -91,15 +61,15 @@ import { Ionicons } from '@expo/vector-icons';
               <Text>Phone Number: {phoneNumber}</Text>
               <Text>Email: {email}</Text>
             </View>
-              <TouchableOpacity onPress={() => console.log("Edit pressed")}>
+              <TouchableOpacity onPress={() => navigation.navigate("Profile")}>
                 <Text style={styles.editButtonHeader}>Edit</Text>
               </TouchableOpacity>
             </View>
           </View>
-          <Text style={styles.itemsHeaderText}>Items ({cartItems.length})</Text>
+          <Text style={styles.itemsHeaderText}>Items ({cartData?.cart?.cartItems?.length})</Text>
 
           <FlatList
-            data={cartItems}
+            data={cartData?.cart?.cartItems}
             keyExtractor={(item, index) => index.toString()}
             renderItem={renderProductItem}
             style={styles.productList}
@@ -107,8 +77,8 @@ import { Ionicons } from '@expo/vector-icons';
           <View style={styles.totalContainer}>
             <View>
             <Text style={styles.totalText}>Total:</Text>
-            <Text style={styles.totalPrice}>₹{totalAmount.toFixed(2)}</Text></View>
-            <TouchableOpacity style={styles.paymentButton}>
+            <Text style={styles.totalPrice}>₹{cartData?.cart?.total}</Text></View>
+            <TouchableOpacity style={styles.paymentButton} onPress={createOrder}>
               <Text style={styles.paymentButtonText}>Make Payment</Text>
             </TouchableOpacity>
           </View>
