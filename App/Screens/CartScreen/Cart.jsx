@@ -156,7 +156,7 @@ export default function Cart() {
       />
       <View style={styles.fixedBottomView}>
         <Text>Total Bill - ₹{totalAmount}</Text>
-        <TouchableOpacity style={styles.checkout} onPress={()=>navigation.navigate('OrdersDetailsPage',{cartData})}>
+        <TouchableOpacity style={styles.checkout} onPress={()=>navigation.navigate('OrderSummaryPage')}>
         <Text style={{ color:Color.TER,fontWeight:600,fontSize:16}}>Checkout</Text>
         </TouchableOpacity>
       </View>
