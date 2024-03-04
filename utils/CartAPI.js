@@ -44,16 +44,29 @@ async function UpdateCart( id, quantity, clerkid) {
     return res
 }
 
-async function updateCartItemQuantity( cartItemID, quantity) {
+async function updateCartItemQuantity(cartItemID, quantity) {
     const MASTER_URL = 'https://api-ap-south-1.hygraph.com/v2/clsj4vqoa000008l18w0o8mis/master';
     const query = gql`
     mutation updateCartItemQuantity {
-        updateCartItem(where: {id: "`+cartItemID+`"}, data: {quantity: `+ quantity +`}) {
-          id
+        updateCartItem(where: {id: "`+ cartItemID +`"}, data: {quantity: `+ quantity +`}) {
+          quantity
         }
       }
     `
     const res = await request(MASTER_URL, query)
     return res
 }
-export default { GetCartByClerkID,UpdateCart,updateCartItemQuantity }
+async function deleteCartItem(cartItemID) {
+  const MASTER_URL = 'https://api-ap-south-1.hygraph.com/v2/clsj4vqoa000008l18w0o8mis/master';
+  const query = gql`
+  mutation updateCartItemQuantity {
+    deleteCartItem(where: {id: "`+ cartItemID +`"}) {
+      id
+    }
+  }
+  `
+  const res = await request(MASTER_URL, query)
+  return res
+}
+
+export default { GetCartByClerkID,UpdateCart,updateCartItemQuantity,deleteCartItem }
