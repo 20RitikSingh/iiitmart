@@ -13,8 +13,8 @@ export default function Cake() {
   const [cakeData, setCakeData] = useState([])
   useEffect(() => {
     Cakes.getCakes().then((res) => {
-      setCakeData(res?.cakes)
-      // console.log(res?.cakes)
+      setCakeData(res?.products)
+      console.log(res?.products)
     })
   }, [])
 
@@ -41,6 +41,7 @@ export default function Cake() {
       </View>
       <View style={styles.cakeCont}>
         <FlatList
+          // data={cakeData}
           data={formatData(cakeData, 2)}
           numColumns={2}
           keyExtractor={(item) => item?.id}

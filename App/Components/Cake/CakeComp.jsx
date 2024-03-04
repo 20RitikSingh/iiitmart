@@ -15,9 +15,9 @@ export default function CakeComp({ item }) {
     item?.name ?
       <View style={styles.cakeContainer}>
         <TouchableOpacity style={styles.cakeImageContainer} onPress={() => {
-          navigation.navigate("CakeDetailPage", { item });
+          navigation.navigate("Product", { item });
         }}>
-          <Image source={{ uri: item?.image?.url }} style={styles.cakeImage} />
+          <Image source={{ uri: item?.images[0]?.url }} style={styles.cakeImage} />
         </TouchableOpacity>
         <Text style={styles.cakeTitle}>{
           (item?.name?.length > 20) ? item?.name.slice(0, 17) + ' ...' : item?.name}

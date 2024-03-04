@@ -1,9 +1,9 @@
 import { request, gql } from 'graphql-request'
-async function getTopDeals(){
-    const MASTER_URL = 'https://api-ap-south-1.hygraph.com/v2/clsj4vqoa000008l18w0o8mis/master';
-    const query = gql`
+async function getTopDeals() {
+  const MASTER_URL = 'https://api-ap-south-1.hygraph.com/v2/clsj4vqoa000008l18w0o8mis/master';
+  const query = gql`
     query getTopDeals {
-        products {
+        products(where: {isCake: false}) {
           id
           name
           price
@@ -13,7 +13,7 @@ async function getTopDeals(){
         }
       }
     `
-   const res = await request(MASTER_URL ,query)
-   return res 
+  const res = await request(MASTER_URL, query)
+  return res
 }
 export default getTopDeals
