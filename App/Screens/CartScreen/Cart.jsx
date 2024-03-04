@@ -9,95 +9,143 @@ import {
 import { ScrollView } from 'react-native-virtualized-view'
 import React, { useEffect, useState } from "react";
 import CartAPI from "../../../utils/CartAPI.js";
-
 import Color from "../../../utils/Color";
-import { ClerkLoading, useClerk } from '@clerk/clerk-react';
+import { useClerk } from '@clerk/clerk-react';
 import { useIsFocused } from '@react-navigation/native';
 import { useNavigation } from '@react-navigation/native';
 export default function Cart() {
   const navigation = useNavigation();
   const [cartData, setCartData] = useState([]);
-  const [productData, setProductData] = useState([]);
   const [totalAmount, setTotalAmount] = useState(0);
   const { user } = useClerk();
   const isFocused = useIsFocused();
-  // useEffect(() => {
-  //   getTopDeals().then((res) => {
-  //     const productsWithQuantity = res?.products.map((product) => ({
-  //       ...product,
-  //       quantity: 0,
-  //     }));
-  //     setcartData(productsWithQuantity);
-  //   });
-  // }, []);
-
 
 //finding the current cart in hygraph db
-
-    useEffect(() => {
-      // console.log(CartAPI.GetCartByClerkID(user.id))
-      CartAPI.GetCartByClerkID(user.id).then((res) => {
-      setCartData(res?.cart?.cartItems);
-        // console.log(res.cart.cartItems)
-      });  
-    }, [isFocused]);
+  function updateCart(){
+    CartAPI.GetCartByClerkID(user.id).then((res) => {
+    setCartData(res?.cart?.cartItems);
+  console.log('cart update hui')
+  });  
+}
+    useEffect(updateCart, [isFocused]);
 
   useEffect(() => {
     let sum = 0
-    productData.map((product) => {
-        sum += product.quantity * product.price
+    cartData.map((item) => {
+     console.log(item.quantity) 
+      if(item.product && item.quantity){
+        sum += item?.product?.price * item?.quantity
+      }
+      else{
+        console.log(item + ' does not exists')
+      }
     });
     setTotalAmount(sum)
   }, [cartData]);
 
-  const CartProduct = ({ item }) => {
-    if(item.product){
-    return (
-    <View style={styles.wrapper}>
-      <View style={styles.product}>
-        <Image source={{ uri: item?.product?.images[0]?.url }} style={styles.productImage} /> 
-          <View style={styles.productDetails}>
-            <Text style={styles.productTitle} numberOfLines={2}>
-              {/* {item?.product.name.length > 40
-                ? item?.product.name.slice(0, 40) + " ..."
-                : item?.product.name} */}
-                {item.product?.name}
-            </Text>
-            <Text style={styles.price}>₹{item?.product?.price}</Text>
-          </View>
-      </View>
-      <View style={styles.quantitySelectorWrapper}>
-            <Text >QTY</Text>
-            <View style={styles.quantitySelector}>
-              <TouchableOpacity
-                style={styles.button}
-                onPress={() => {
-                  if(item.quantity>0){
-                    CartAPI.updateCartItemQuantity(item.id,item.quantity-1).then((res) => {
-                    // console.log(res)
-                    })
-                  }
-                }}
-              >
-                <Text style={{fontSize:20}}>-</Text>
-              </TouchableOpacity>
-              <Text style={{fontSize:20,paddingHorizontal:10,borderColor:Color.GREY,borderWidth:1,borderRadius:4}} >{item.quantity}</Text>
-              <TouchableOpacity
-                style={styles.button}
-                onPress={() => {
-               CartAPI.updateCartItemQuantity(item.id,item.quantity+1).then((res) => {
+ const CartProduct = ({ item })=>{
+  if(item.product){
+  return (
+  <View style={styles.wrapper}>
+    <View style={styles.product}>
+      <Image source={{ uri: item?.product?.images[0]?.url }} style={styles.productImage} /> 
+        <View style={styles.productDetails}>
+          <Text style={styles.productTitle} numberOfLines={2}>
+        
+              {item.product?.name}
+          </Text>
+          <Text style={styles.price}>₹{item?.product?.price}</Text>
+        </View>
+    </View>
+    <View style={styles.quantitySelectorWrapper}>
+          <Text >QTY</Text>
+          <View style={styles.quantitySelector}>
+            <TouchableOpacity
+              style={styles.button}
+              onPress={() => {
+                if(item.quantity > 1){
+                  
+                  setCartData(prevCartData => {
+                    const updatedCartData = prevCartData.map(cartItem => {
+                      if (cartItem.id === item.id) {
+                        return {
+                          ...cartItem,
+                          quantity: cartItem.quantity - 1
+                        };
+                      }
+                      return cartItem;
+                    });
+                    return updatedCartData;
+                  });
+                
+  
+                  CartAPI.updateCartItemQuantity(item.id, item.quantity - 1).then((res) => {
+                    setCartData(prevCartData => {
+                      const updatedCartData = prevCartData.map(cartItem => {
+                        if (cartItem.id === item.id) {
+                          return {
+                            ...cartItem,
+                            quantity: cartItem.quantity - 1
+                          };
+                        }
+                        return cartItem;
+                      });
+                      return updatedCartData;
+                    });
+                    console.log(res, item.quantity);
+                  });
+                }
+                else if(item.quantity == 1){
+                  setCartData(prevCartData => {
+                    const updatedCartData = prevCartData.filter(cartItem => cartItem.id !== item.id);
+                    return updatedCartData;
+                  });
+                  CartAPI.deleteCartItem(item.id).then(res => console.log(res))
 
-               })
-                }}
-              >
-                <Text style={{fontSize:20}} >+</Text>
-              </TouchableOpacity>
-            </View>
+                }
+              }}
+            >
+              <Text style={{fontSize:20}}>-</Text>
+            </TouchableOpacity>
+            <Text 
+            style={{fontSize:20,
+            paddingHorizontal:10,
+            borderColor:Color.GREY,
+            borderWidth:1,
+            borderRadius:4}}>
+            {item.quantity}
+            </Text>
+            <TouchableOpacity
+              style={styles.button}
+              onPress={() => {
+                setCartData(prevCartData => {
+                  const updatedCartData = prevCartData.map(cartItem => {
+                    if (cartItem.id === item.id) {
+                      return {
+                        ...cartItem,
+                        quantity: cartItem.quantity + 1
+                      };
+                    }
+                    return cartItem;
+                  });
+                  return updatedCartData;
+                });
+              
+
+                CartAPI.updateCartItemQuantity(item.id, item.quantity + 1).then((res) => {
+                  console.log(res, item.quantity);
+                });
+              }}
+            >
+              <Text style={{fontSize:20}} >+</Text>
+            </TouchableOpacity>
           </View>
-      </View>
-    );
-              }
-  };
+        </View>
+    </View>
+  );
+            }
+};
+
   return (
     <ScrollView>
       <Text style={styles.heading}>{user.firstName}'s Cart</Text>
