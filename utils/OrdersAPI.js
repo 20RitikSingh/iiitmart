@@ -27,5 +27,26 @@ async function getUserOrders(id) {
     const res = await request(MASTER_URL,query)
     return res
 }
+async function placeOrder( id, quantity, clerkid) {
+  const MASTER_URL = 'https://api-ap-south-1.hygraph.com/v2/clsj4vqoa000008l18w0o8mis/master';
+  const query = gql`
+  mutation PlaceOrder {
+      createOrderItem(
+        data: {product: {connect: {id: "`+id+`"}}, quantity: `+quantity+`, order: {connect: {clerkid: "`+clerkid+`"}}}
+      ) {
+        id
+      }
+      publishManyOrderItems {
+        count
+      }
+      publishManyOrders {
+        count
+      }
+    }
+  `
+  const res = await request(MASTER_URL, query)
+  return res
+}
 
-export default { getUserOrders }
+
+export default { getUserOrders , placeOrder}
