@@ -35,9 +35,10 @@ export default function Cart() {
 //finding the current cart in hygraph db
 
     useEffect(() => {
+      // console.log(CartAPI.GetCartByClerkID(user.id))
       CartAPI.GetCartByClerkID(user.id).then((res) => {
       setCartData(res?.cart?.cartItems);
-        // console.log(cartData)
+        // console.log(res.cart.cartItems)
       });  
     }, [isFocused]);
 
@@ -50,10 +51,11 @@ export default function Cart() {
   }, [cartData]);
 
   const CartProduct = ({ item }) => {
+    if(item.product){
     return (
     <View style={styles.wrapper}>
       <View style={styles.product}>
-        <Image source={{ uri: item?.product?.images[0].url }} style={styles.productImage} /> 
+        <Image source={{ uri: item?.product?.images[0]?.url }} style={styles.productImage} /> 
           <View style={styles.productDetails}>
             <Text style={styles.productTitle} numberOfLines={2}>
               {/* {item?.product.name.length > 40
@@ -61,7 +63,7 @@ export default function Cart() {
                 : item?.product.name} */}
                 {item.product?.name}
             </Text>
-            <Text style={styles.price}>₹{item.product?.price}</Text>
+            <Text style={styles.price}>₹{item?.product?.price}</Text>
           </View>
       </View>
       <View style={styles.quantitySelectorWrapper}>
@@ -72,7 +74,7 @@ export default function Cart() {
                 onPress={() => {
                   if(item.quantity>0){
                     CartAPI.updateCartItemQuantity(item.id,item.quantity-1).then((res) => {
-                    console.log(res)
+                    // console.log(res)
                     })
                   }
                 }}
@@ -94,6 +96,7 @@ export default function Cart() {
           </View>
       </View>
     );
+              }
   };
   return (
     <ScrollView>
