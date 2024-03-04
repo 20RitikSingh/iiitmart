@@ -35,10 +35,9 @@ export default function Cart() {
 //finding the current cart in hygraph db
 
     useEffect(() => {
-      console.log(CartAPI.GetCartByClerkID(user.id))
       CartAPI.GetCartByClerkID(user.id).then((res) => {
       setCartData(res?.cart?.cartItems);
-        console.log(cartData)
+        // console.log(cartData)
       });  
     }, [isFocused]);
 
@@ -106,7 +105,7 @@ export default function Cart() {
       />
       <View style={styles.fixedBottomView}>
         <Text>Total Bill - ₹{totalAmount}</Text>
-        <TouchableOpacity style={styles.checkout} onPress={()=>navigation.navigate('OrdersDetailsPage',{cartData})}>
+        <TouchableOpacity style={styles.checkout} onPress={()=>navigation.navigate('OrderSummaryPage')}>
         <Text style={{ color:Color.TER,fontWeight:600,fontSize:16}}>Checkout</Text>
         </TouchableOpacity>
       </View>
