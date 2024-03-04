@@ -8,7 +8,6 @@ import { useNavigation } from '@react-navigation/native';
 import Customer from '../../../utils/Customer';
 import CartAPI from '../../../utils/CartAPI';
 import Payment from './Payment';
-import createOrder from './Payment';
 
   const OrderSummaryPage = ({ route }) => {
     const navigation = useNavigation();
@@ -78,7 +77,7 @@ import createOrder from './Payment';
             <View>
             <Text style={styles.totalText}>Total:</Text>
             <Text style={styles.totalPrice}>₹{cartData?.cart?.total}</Text></View>
-            <TouchableOpacity style={styles.paymentButton} onPress={createOrder}>
+            <TouchableOpacity style={styles.paymentButton} onPress={()=>Payment(cartData?.cart)}>
               <Text style={styles.paymentButtonText}>Make Payment</Text>
             </TouchableOpacity>
           </View>
