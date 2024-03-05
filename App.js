@@ -1,4 +1,4 @@
-import { SafeAreaView, StyleSheet, Text, View } from 'react-native';
+import { SafeAreaView, StyleSheet, StatusBar, View } from 'react-native';
 import Login from './App/Screens/LoginScreen/Login';
 import { ClerkProvider, SignedIn, SignedOut } from '@clerk/clerk-expo';
 import * as SecureStore from "expo-secure-store"
@@ -8,7 +8,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import TabNavigation from './App/Navigations/TabNavigation';
 import MyStack from './App/Navigations/MyStack';
 import * as Linking from 'expo-linking';
-import { StatusBar } from 'expo-status-bar';
+import { StatusBar as Sb } from 'expo-status-bar';
 
 const prefix = Linking.createURL('/');
 
@@ -36,7 +36,7 @@ export default function App() {
     <ClerkProvider tokenCache={tokenCache} publishableKey='pk_test_YW11c2luZy1vcmlvbGUtNTMuY2xlcmsuYWNjb3VudHMuZGV2JA'>
       <ToastProvider>
         <View style={styles.container}>
-          <StatusBar style="dark" />
+          <Sb style="dark" />
           <SignedIn>
             <NavigationContainer>
               <MyStack />
@@ -57,6 +57,6 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#fff",
     // paddingTop: 30,
-    // marginTop: StatusBar.currentHeight
+    marginTop: StatusBar.currentHeight
   },
 });
