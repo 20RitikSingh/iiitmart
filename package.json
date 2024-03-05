@@ -16,6 +16,7 @@
     "@react-navigation/native-stack": "^6.9.18",
     "@react-navigation/stack": "^6.3.21",
     "expo": "~50.0.6",
+    "expo-linking": "~6.2.2",
     "expo-secure-store": "^12.8.1",
     "expo-status-bar": "~1.11.1",
     "expo-web-browser": "~12.8.2",
@@ -29,8 +30,7 @@
     "react-native-screens": "~3.29.0",
     "react-native-swiper": "^1.6.0",
     "react-native-toast-notifications": "^3.4.0",
-    "react-native-virtualized-view": "^1.0.0",
-    "expo-linking": "~6.2.2"
+    "react-native-virtualized-view": "^1.0.0"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0"
