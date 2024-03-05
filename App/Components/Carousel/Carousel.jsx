@@ -33,6 +33,7 @@ export default function Carousel({ Heading, API }) {
             <View style={styles.productImageContainer}>
               <TouchableOpacity onPress={() => {
                 navigation.navigate("Product",{item});
+                // console.log(item);
                 }}>
                 <Image source={{ uri: item?.images[0]?.url }} style={styles.productImage} />
               </TouchableOpacity>

@@ -30,7 +30,7 @@ export default function CakeComp({ item }) {
           <View style={styles.cartCont}>
             <TouchableOpacity style={styles.addToCartText} onPress={() => {
               addToCart(user.id, item, 1)
-              console.log(item);
+              // console.log(item);
             }}>
               <Text style={{ fontSize: 10 }}>ADD</Text>
               {/* <Feather name="minus" size={14} color={Color.TER} /> */}

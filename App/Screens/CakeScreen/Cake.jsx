@@ -14,7 +14,7 @@ export default function Cake() {
   useEffect(() => {
     Cakes.getCakes().then((res) => {
       setCakeData(res?.products)
-      console.log(res?.products)
+      // console.log(res?.products)
     })
   }, [])
 

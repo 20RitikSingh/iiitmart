@@ -7,6 +7,7 @@ async function getTopDeals() {
           id
           name
           price
+          description
           images {
             url
           }

@@ -7,6 +7,9 @@ import { ToastProvider } from 'react-native-toast-notifications'
 import { NavigationContainer } from '@react-navigation/native';
 import TabNavigation from './App/Navigations/TabNavigation';
 import MyStack from './App/Navigations/MyStack';
+import * as Linking from 'expo-linking';
+
+const prefix = Linking.createURL('/');
 
 
 export default function App() {

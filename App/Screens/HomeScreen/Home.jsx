@@ -30,8 +30,10 @@ export default function Home({ route }) {
       <SearchBar navigation={route} />
       {/* <SearchBar /> */}
       <Banner />
-      <TopDeals />
+      <TopDeals heading="Top Deals" />
       <Categories />
+      <TopDeals heading="Previous Orders" />
+      <TopDeals heading="Top in skin care" />
     </ScrollView>
   )
 }
