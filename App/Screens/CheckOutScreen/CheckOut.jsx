@@ -77,7 +77,7 @@ import Payment from './Payment';
             <View>
             <Text style={styles.totalText}>Total:</Text>
             <Text style={styles.totalPrice}>₹{cartData?.cart?.total}</Text></View>
-            <TouchableOpacity style={styles.paymentButton} onPress={()=>Payment(cartData?.cart)}>
+            <TouchableOpacity style={styles.paymentButton} onPress={()=>Payment(cartData?.cart,user.id,name,email,address,phoneNumber,navigation)}>
               <Text style={styles.paymentButtonText}>Make Payment</Text>
             </TouchableOpacity>
           </View>
