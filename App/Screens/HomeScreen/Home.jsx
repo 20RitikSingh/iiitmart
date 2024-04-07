@@ -9,6 +9,8 @@ import Categories from './Categories'
 import { useNavigation } from '@react-navigation/native'
 import { useUser } from '@clerk/clerk-react'
 import Customer from '../../../utils/Customer'
+import ProductGroup from '../../Components/ProductGroup/ProductGroup'
+import Cakes from '../../../utils/Cakes'
 export default function Home({ route }) {
 
   const { user, isLoading } = useUser();
@@ -33,6 +35,7 @@ export default function Home({ route }) {
       <TopDeals heading="Top Deals" />
       <Categories />
       <TopDeals heading="Previous Orders" />
+      <ProductGroup heading={"Product head"} api={Cakes} />
       <TopDeals heading="Top in skin care" />
     </ScrollView>
   )

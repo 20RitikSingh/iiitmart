@@ -17,9 +17,9 @@ export default function Profile() {
         },
         {
             id: 2,
-            name: 'Reffer Points',
-            icon: 'share-square-o',
-            press: ''
+            name: 'Address',
+            icon: 'address-card-o',
+            press: 'addAddressModal'
         },
         {
             id: 3,
@@ -35,9 +35,9 @@ export default function Profile() {
         },
         {
             id: 5,
-            name: 'Address',
-            icon: 'address-card-o',
-            press: 'addAddressModal'
+            name: 'Reffer Points',
+            icon: 'share-square-o',
+            press: ''
         },
         {
             id: 6,

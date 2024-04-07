@@ -101,65 +101,72 @@ export default function ProfileMenu({ item }) {
     }
 
     return (
-        <TouchableOpacity style={styles.container}
-            onPress={check}
-        >
-            <View style={styles.innerCont}>
-                <FontAwesome name={item.icon} size={27} color={Color.PRIMARY} />
-                <Text style={{ fontSize: 16, color: Color.PRIMARY, fontWeight: 600 }} >{item.name}</Text>
-                <FontAwesome name="angle-right" size={27} color={Color.PRIMARY} />
-            </View>
-            {item.press == 'addAddressModal' &&
-                <Modal
-                    animationType="slide"
-                    transparent={true}
-                    visible={modalVisible}
-                    onRequestClose={() => {
-                        Alert.alert('Modal has been closed.');
-                        setModalVisible(!modalVisible);
-                    }}>
+        <>
+            <TouchableOpacity style={styles.container}
+                onPress={check}
+            >
+                <View style={styles.innerCont}>
+                    <FontAwesome name={item.icon} size={27} color={Color.PRIMARY} />
+                    <Text style={{ fontSize: 16, color: Color.PRIMARY, fontWeight: 600 }} >{item.name}</Text>
+                    <FontAwesome name={item.id < 3 ? "angle-right" : "lock"} size={27} color={Color.PRIMARY} />
+                </View>
+                {item.press == 'addAddressModal' &&
+                    <Modal
+                        animationType="slide"
+                        transparent={true}
+                        visible={modalVisible}
+                        onRequestClose={() => {
+                            Alert.alert('Modal has been closed.');
+                            setModalVisible(!modalVisible);
+                        }}>
 
-                    <View style={styles.centeredView}>
-                        <View style={styles.modalView}>
-                            <View style={styles.modalHead}>
-                                <Text style={styles.modalText}>Update your Address</Text>
-                                <Pressable
-                                    style={styles.buttonClose}
-                                    onPress={() => setModalVisible(!modalVisible)}>
-                                    <AntDesign name="close" size={24} color="black" />
-                                </Pressable>
-                            </View>
-                            <View style={{ width: '95%' }}>
-                                {/* <TextInput selectionColor={Color.PRIMARY} placeholder='Search' placeholderTextColor={Color.PRIMARY} style={styles.addressText} /> */}
-                                <Text style={styles.label}>Address</Text>
-                                <TextInput
-                                    style={styles.input}
-                                    onChangeText={onChangeText}
-                                    placeholder="Enter Address"
-                                    value={text}
-                                />
-                                <Text style={styles.label}>Phone No.</Text>
-                                <TextInput
-                                    style={styles.input}
-                                    onChangeText={onChangeNumber}
-                                    value={number}
-                                    placeholder="Enter Number"
-                                    keyboardType="numeric"
-                                />
+                        <View style={styles.centeredView}>
+                            <View style={styles.modalView}>
+                                <View style={styles.modalHead}>
+                                    <Text style={styles.modalText}>Update your Address</Text>
+                                    <Pressable
+                                        style={styles.buttonClose}
+                                        onPress={() => setModalVisible(!modalVisible)}>
+                                        <AntDesign name="close" size={24} color="black" />
+                                    </Pressable>
+                                </View>
+                                <View style={{ width: '95%' }}>
+                                    {/* <TextInput selectionColor={Color.PRIMARY} placeholder='Search' placeholderTextColor={Color.PRIMARY} style={styles.addressText} /> */}
+                                    <Text style={styles.label}>Address</Text>
+                                    <TextInput
+                                        style={styles.input}
+                                        onChangeText={onChangeText}
+                                        placeholder="Enter Address"
+                                        value={text}
+                                    />
+                                    <Text style={styles.label}>Phone No.</Text>
+                                    <TextInput
+                                        style={styles.input}
+                                        onChangeText={onChangeNumber}
+                                        value={number}
+                                        placeholder="Enter Number"
+                                        keyboardType="numeric"
+                                    />
 
-                            </View>
-                            <View style={styles.btnCont}>
-                                <Pressable
-                                    style={styles.buttonAdd}
-                                    onPress={addAddress}>
-                                    <Text style={styles.textStyle}>Save Address</Text>
-                                </Pressable>
+                                </View>
+                                <View style={styles.btnCont}>
+                                    <Pressable
+                                        style={styles.buttonAdd}
+                                        onPress={addAddress}>
+                                        <Text style={styles.textStyle}>Save Address</Text>
+                                    </Pressable>
+                                </View>
                             </View>
                         </View>
-                    </View>
-                </Modal>
+                    </Modal>
+                }
+            </TouchableOpacity>
+            {item.id == 2 &&
+                <View style={styles.soon}>
+                    <Text style={{ color: Color.TER }}>Comming Soon...</Text>
+                </View>
             }
-        </TouchableOpacity>
+        </>
     )
 }
 
@@ -193,6 +200,20 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         marginTop: 22,
+    },
+    soon: {
+        display: 'flex',
+        backgroundColor: Color.PRIMARY,
+        fontSize: 16,
+        fontWeight: 'bold',
+        color: Color.WHITE,
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginTop: 25,
+        marginLeft: 10,
+        marginRight: 10,
+        padding: 3,
+        borderRadius: 20,
     },
     modalView: {
         margin: 20,

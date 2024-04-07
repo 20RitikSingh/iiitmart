@@ -7,7 +7,7 @@ import addToCart from '../../Screens/CartScreen/addToCart';
 import { useNavigation } from '@react-navigation/native';
 
 
-export default function CakeComp({ item }) {
+export default function CakeComp({ item, desc = true }) {
   const { user } = useClerk();
   const navigation = useNavigation();
   return (
@@ -22,9 +22,11 @@ export default function CakeComp({ item }) {
         <Text style={styles.cakeTitle}>{
           (item?.name?.length > 20) ? item?.name.slice(0, 17) + ' ...' : item?.name}
         </Text>
-        <Text style={styles.cakeDesc}>{
-          (item?.description?.length > 60) ? item?.description.slice(0, 57) + ' ...' : item?.description}
-        </Text>
+        {desc &&
+          <Text style={styles.cakeDesc}>{
+            (item?.description?.length > 60) ? item?.description.slice(0, 57) + ' ...' : item?.description}
+          </Text>
+        }
         <View style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingHorizontal: 4 }}>
           <Text style={styles.cakePrice}>₹{item?.price}</Text>
           <View style={styles.cartCont}>
