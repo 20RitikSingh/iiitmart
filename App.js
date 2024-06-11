@@ -1,20 +1,62 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { SafeAreaView, StyleSheet, StatusBar, View } from 'react-native';
+import Login from './App/Screens/LoginScreen/Login';
+import { ClerkProvider, SignedIn, SignedOut } from '@clerk/clerk-expo';
+import * as SecureStore from "expo-secure-store"
+import Home from './App/Screens/HomeScreen/Home';
+import { ToastProvider } from 'react-native-toast-notifications'
+import { NavigationContainer } from '@react-navigation/native';
+import TabNavigation from './App/Navigations/TabNavigation';
+import MyStack from './App/Navigations/MyStack';
+import * as Linking from 'expo-linking';
+import { StatusBar as Sb } from 'expo-status-bar';
+
+const prefix = Linking.createURL('/');
+
 
 export default function App() {
+
+  const tokenCache = {
+    async getToken(key) {
+      try {
+        return SecureStore.getItemAsync(key);
+      } catch (err) {
+        return null;
+      }
+    },
+    async saveToken(key, value) {
+      try {
+        return SecureStore.setItemAsync(key, value);
+      } catch (err) {
+        return;
+      }
+    },
+  };
+
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <ClerkProvider tokenCache={tokenCache} publishableKey='pk_test_YW11c2luZy1vcmlvbGUtNTMuY2xlcmsuYWNjb3VudHMuZGV2JA'>
+      <ToastProvider>
+        <View style={styles.container}>
+          <Sb style="dark" />
+          <SignedIn>
+            <NavigationContainer>
+              <MyStack />
+            </NavigationContainer>
+            {/* <Home /> */}
+          </SignedIn>
+          <SignedOut>
+            <Login />
+          </SignedOut>
+        </View>
+      </ToastProvider>
+    </ClerkProvider>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor: "#fff",
+    // paddingTop: 30,
+    marginTop: StatusBar.currentHeight
   },
 });
